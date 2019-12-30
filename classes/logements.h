@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+/* Structures */
+
+// Type Logement
 typedef enum {
     CHAMBRE, 
     STUDIO,
@@ -8,6 +11,7 @@ typedef enum {
     T2
 } TypeLogement;
 
+// Logement
 typedef struct {
     int idLogement;
     char* nomCite;
@@ -16,6 +20,8 @@ typedef struct {
     bool adapteHandicap;
     int idEtudiant;
 } Logement;
+
+/* Fonctions */
 
 char* getTypeLogement(TypeLogement typeLogement);
 Logement lireLogement(FILE* flot);
