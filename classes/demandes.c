@@ -19,21 +19,21 @@ Demande lireDemande (FILE* flot) {
 	Demande dema;
 
 	char nomCite[65];
-    int tailleNomCite;
+   	int tailleNomCite;
 
 	fscanf(flot, "%d%*c", &dema.idDemande);
 	fscanf(flot, "%d%*c", &dema.idEtudiant);
 
 	fgets(nomCite, 65, flot);
-    tailleNomCite = strlen(nomCite);
-    if(nomCite[tailleNomCite - 2] == '\n') {
-        nomCite[tailleNomCite - 2] = '\0';
-        tailleNomCite--;
-    }
-    dema.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
-    if (dema.nomCite == NULL) {
-        printf("Problème d'allocation mémoire\n");
-        exit(1);
-    }
-    strcpy(dema.nomCite, nomCite);
+    	tailleNomCite = strlen(nomCite);
+    	if(nomCite[tailleNomCite - 2] == '\n') {
+        	nomCite[tailleNomCite - 2] = '\0';
+        	tailleNomCite--;
+    	}
+    	dema.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
+    	if (dema.nomCite == NULL) {
+        	printf("Problème d'allocation mémoire\n");
+        	exit(1);
+    	}
+	strcpy(dema.nomCite, nomCite);
 }
