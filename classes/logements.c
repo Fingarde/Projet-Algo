@@ -1,9 +1,9 @@
-#include "logements.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+
+#include "logements.h"
 
 char typeLogementValues[4][8] = {"Chambre", "Studio", "T1", "T2"}; // Chaine de caractères correspondant aux valeurs de l'enum
 char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
@@ -11,14 +11,14 @@ char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de cara
 }
 
 Logement lireLogement(FILE* flot) {
-    Logement logement;
+    Logement loge;
 
     char nomCite[65];
     int tailleNomCite;
 
-    logement.idEtudiant = -1;
+    loge.idEtudiant = -1;
 
-    fscanf(flot, "%d%*c", &logement.idLogement);
+    fscanf(flot, "%d%*c", &loge.idLogement);
 
     fgets(nomCite, 65, flot);
     tailleNomCite = strlen(nomCite);
@@ -26,15 +26,20 @@ Logement lireLogement(FILE* flot) {
         nomCite[tailleNomCite - 2] = '\0';
         tailleNomCite--;
     }
-    logement.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
-    strcpy(logement.nomCite, nomCite);
+    loge.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
+    if (loge.nomCite == NULL) {
+        printf("Problème d'allocation mémoire\n");
+        exit(1);
+    }
+    strcpy(loge.nomCite, nomCite);
 
-    fscanf(flot, "%d%*c", &logement.typeLogement);
-    fscanf(flot, "%d%*c", &logement.disponible);
-    fscanf(flot, "%d%*c", &logement.adapteHandicap);
+    fscanf(flot, "%d%*c", &loge.typeLogement);
+    fscanf(flot, "%d%*c", &loge.disponible);
+    fscanf(flot, "%d%*c", &loge.adapteHandicap);
 
-    if(logement.disponible == 0) fscanf(flot, "%d%*c", &logement.idEtudiant);
+    if(loge.disponible == 0) {
+        fscanf(flot, "%d%*c", &loge.idEtudiant);
+    }
 
-    return logement;
+    return loge;
 }
-
