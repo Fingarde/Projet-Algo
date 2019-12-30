@@ -1,9 +1,9 @@
-#include "etudiants.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+
+#include "etudiants.h"
 
 char civiliteValues[2][4] = {"Mr", "Mme"}; // Chaine de caractères correspondant aux valeurs de l'enum
 char* getCivilite(Civilite civilite) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
@@ -17,16 +17,14 @@ char* getEchelon(Echelon echelon) { // Retourne la chaine de caractères corresp
 }
 
 Etudiant lireEtudiant(FILE* flot) {
-    Etudiant etudiant;
-
+    Etudiant etdud;
     char nom[65];
     int tailleNom;
-
     char prenom[65];
     int taillePrenom;
 
-    fscanf(flot, "%d%*c", &etudiant.idEtudiant);
-    fscanf(flot, "%d%*c", &etudiant.civilite);
+    fscanf(flot, "%d%*c", &etdud.idEtudiant);
+    fscanf(flot, "%d%*c", &etdud.civilite);
 
     fgets(nom, 65, flot);
     tailleNom = strlen(nom);
@@ -34,8 +32,12 @@ Etudiant lireEtudiant(FILE* flot) {
         nom[tailleNom - 2] = '\0';
         tailleNom--;
     }
-    etudiant.nom = (char*) malloc(sizeof(char) * tailleNom + 1);
-    strcpy(etudiant.nom, nom);
+    etdud.nom = (char*)malloc(sizeof(char) * tailleNom + 1);
+    if (etdud.nom == NULL) {
+        printf("Problème d'allocation de la mémoire\n");
+        exit(1);
+    }
+    strcpy(etdud.nom, nom);
 
     fgets(prenom, 65, flot);
     taillePrenom = strlen(prenom);
@@ -43,16 +45,22 @@ Etudiant lireEtudiant(FILE* flot) {
         prenom[taillePrenom - 2] = '\0';
         taillePrenom--;
     }
-    etudiant.prenom = (char*) malloc(sizeof(char) * taillePrenom + 1);
-    strcpy(etudiant.prenom, prenom);
+    etdud.prenom = (char*)malloc(sizeof(char) * taillePrenom + 1);
+    if (etdud.prenom == NULL) {
+        printf("Problème d'allocation de la mémoire\n");
+        exit(1);
+    }
+    strcpy(etdud.prenom, prenom);
 
-    fscanf(flot, "%d%*c", &etudiant.echelon);
-    fscanf(flot, "%d%*c", &etudiant.handicape);
+    fscanf(flot, "%d%*c", &etdud.echelon);
+    fscanf(flot, "%d%*c", &etdud.handicape);
 
-    return etudiant;
+    return etdud;
 }
 
-bool isBoursier(Etudiant etudiant) {
-    if(etudiant.echelon) return true;
+bool isBoursier(Etudiant etdud) {
+    if(etdud.echelon) {
+        return true;
+    }
     return false;
 }
