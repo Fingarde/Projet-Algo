@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+/* Structures */
+
+// Civilité
 typedef enum {
     MR,
     MME
 } Civilite;
 
+// Échelon
 typedef enum {
     ZERO_BIS,
     UN,
@@ -17,6 +21,7 @@ typedef enum {
     SEPT
 } Echelon;
 
+// Étudiant
 typedef struct {
     int idEtudiant;
     Civilite civilite;
@@ -25,6 +30,8 @@ typedef struct {
     Echelon echelon;
     bool handicape;
 } Etudiant;
+
+/* Fonctions */
 
 char* getCivilite(Civilite civilite);
 char* getEchelon(Echelon echelon);
