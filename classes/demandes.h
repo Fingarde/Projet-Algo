@@ -5,6 +5,7 @@
 #include "logements.h"
 
 /* Structures */
+
 typedef struct {
 	int idDemande;
 	int idEtudiant;
@@ -14,3 +15,7 @@ typedef struct {
 } Demande;
 
 /* Fonctions */
+
+char* getEchelon(Echelon echelon)
+char* getTypeLogement(TypeLogement typeLogement);
+Demande lireDemande (FILE* flot)
