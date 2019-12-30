@@ -10,7 +10,6 @@ char* getCivilite(Civilite civilite) { // Retourne la chaine de caractères corr
     return civiliteValues[civilite];
 }
 
-
 char echelonValues[8][5] = {"0bis", "01", "02", "03", "04", "05", "06", "07"}; // Chaine de caractères correspondant aux valeurs de l'enum
 char* getEchelon(Echelon echelon) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
     return echelonValues[echelon];
