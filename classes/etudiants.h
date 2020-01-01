@@ -36,3 +36,4 @@ typedef struct {
 char* getCivilite(Civilite civilite);
 char* getEchelon(Echelon echelon);
 Etudiant lireEtudiant(FILE* flot);
+bool isBoursier(Etudiant etud);
