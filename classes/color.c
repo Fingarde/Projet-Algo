@@ -1,6 +1,6 @@
-#include "color.h"
-
 #include <stdio.h>
+
+#include "color.h"
 
 void setColor(Color color) {
     switch(color) {
