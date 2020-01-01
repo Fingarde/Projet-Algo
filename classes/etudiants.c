@@ -16,14 +16,22 @@ char* getEchelon(Echelon echelon) { // Retourne la chaine de caractères corresp
 }
 
 Etudiant lireEtudiant(FILE* flot) {
-    Etudiant etdud;
+    Etudiant etud;
+    Civilite civi;
+    Echelon eche;
+
+    char civilite[4];
     char nom[65];
     int tailleNom;
     char prenom[65];
     int taillePrenom;
+    char echelon[5];
 
-    fscanf(flot, "%d%*c", &etdud.idEtudiant);
-    fscanf(flot, "%d%*c", &etdud.civilite);
+    fscanf(flot, "%d%*c", &etud.idEtudiant);
+
+    civilite = getCivilite(civi);
+
+    fscanf(flot, "%d%*c", &etud.civilite);
 
     fgets(nom, 65, flot);
     tailleNom = strlen(nom);
@@ -31,12 +39,12 @@ Etudiant lireEtudiant(FILE* flot) {
         nom[tailleNom - 2] = '\0';
         tailleNom--;
     }
-    etdud.nom = (char*)malloc(sizeof(char) * tailleNom + 1);
-    if (etdud.nom == NULL) {
+    etud.nom = (char*)malloc(sizeof(char) * tailleNom + 1);
+    if (etud.nom == NULL) {
         printf("Problème d'allocation de la mémoire\n");
         exit(1);
     }
-    strcpy(etdud.nom, nom);
+    strcpy(etud.nom, nom);
 
     fgets(prenom, 65, flot);
     taillePrenom = strlen(prenom);
@@ -44,21 +52,22 @@ Etudiant lireEtudiant(FILE* flot) {
         prenom[taillePrenom - 2] = '\0';
         taillePrenom--;
     }
-    etdud.prenom = (char*)malloc(sizeof(char) * taillePrenom + 1);
-    if (etdud.prenom == NULL) {
+    etud.prenom = (char*)malloc(sizeof(char) * taillePrenom + 1);
+    if (etud.prenom == NULL) {
         printf("Problème d'allocation de la mémoire\n");
         exit(1);
     }
-    strcpy(etdud.prenom, prenom);
+    strcpy(etud.prenom, prenom);
 
-    fscanf(flot, "%d%*c", &etdud.echelon);
-    fscanf(flot, "%d%*c", &etdud.handicape);
+    echelon = getEchelon[eche];
 
-    return etdud;
+    // Booleen handicape
+
+    return etud;
 }
 
-bool isBoursier(Etudiant etdud) {
-    if(etdud.echelon) {
+bool isBoursier(Etudiant etud) {
+    if (etud.echelon) {
         return true;
     }
     return false;
