@@ -12,9 +12,11 @@ char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de cara
 
 Logement lireLogement(FILE* flot) {
     Logement loge;
+    TypeLogement type;
 
     char nomCite[65];
     int tailleNomCite;
+    char typeLoge[8];
 
     loge.idEtudiant = -1;
 
@@ -33,11 +35,15 @@ Logement lireLogement(FILE* flot) {
     }
     strcpy(loge.nomCite, nomCite);
 
-    fscanf(flot, "%d%*c", &loge.typeLogement);
-    fscanf(flot, "%d%*c", &loge.disponible);
-    fscanf(flot, "%d%*c", &loge.adapteHandicap);
+    typeLoge = getTypeLogement(type);
 
-    if(loge.disponible == 0) {
+    fscanf(flot, "%d%*c", &loge.typeLogement);
+    
+    // Booléen disponible
+
+    // Booléen adapté handicapé
+
+    if (loge.disponible == 0) {
         fscanf(flot, "%d%*c", &loge.idEtudiant);
     }
 
