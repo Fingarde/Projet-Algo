@@ -31,15 +31,15 @@ Demande lireDemande (FILE* flot) {
    	 echelon = getEchelon(eche);
 
 	fgets(nomCite, 65, flot);
-    tailleNomCite = strlen(nomCite);
-    if(nomCite[tailleNomCite - 2] == '\n') {
-    	nomCite[tailleNomCite - 2] = '\0';
-    	tailleNomCite--;
+    	tailleNomCite = strlen(nomCite);
+    	if(nomCite[tailleNomCite - 2] == '\n') {
+    		nomCite[tailleNomCite - 2] = '\0';
+    		tailleNomCite--;
 	}
 	dema.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
    	if (dema.nomCite == NULL) {
-       	printf("Problème d'allocation mémoire\n");
-      	exit(1);
+       		printf("Problème d'allocation mémoire\n");
+      		exit(1);
    	}
 	strcpy(dema.nomCite, nomCite);
 
