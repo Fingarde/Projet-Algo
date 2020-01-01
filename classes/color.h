@@ -1,3 +1,5 @@
+/* Structure */
+
 /*
     Color Codes
 
@@ -16,6 +18,7 @@
     \033[0m     Reset
 */
 
+// Couleur
 typedef enum {
     RED, 
     BOLD_RED,
@@ -31,5 +34,7 @@ typedef enum {
     BOLD_CYAN,
     RESET
 } Color;
+
+/* Fonction */
 
 void setColor(Color color);
