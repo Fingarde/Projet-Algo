@@ -43,5 +43,5 @@ Demande lireDemande (FILE* flot) {
    	}
 	strcpy(dema.nomCite, nomCite);
 
-    	typeLoge = getTypeLogement(typeLoge);
+    typeLoge = getTypeLogement(typeLoge);
 }
