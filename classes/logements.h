@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-/* Structures */
+/* Structure et Énumération */
 
 // Type Logement
 typedef enum {
