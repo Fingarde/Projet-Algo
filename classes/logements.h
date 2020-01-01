@@ -21,7 +21,7 @@ typedef struct {
     int idEtudiant;
 } Logement;
 
-/* Fonctions */
+/* Prototypes */
 
 char* getTypeLogement(TypeLogement typeLogement);
 Logement lireLogement(FILE* flot);
