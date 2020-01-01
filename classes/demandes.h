@@ -16,6 +16,6 @@ typedef struct {
 
 /* Prototypes */
 
-char* getEchelon(Echelon echelon)
+char* getEchelon(Echelon echelon);
 char* getTypeLogement(TypeLogement typeLogement);
-Demande lireDemande (FILE* flot)
+Demande lireDemande (FILE* flot);
