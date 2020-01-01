@@ -27,13 +27,13 @@ typedef struct {
     Civilite civilite;
     char* nom;
     char* prenom;
+    bool bourse;
     Echelon echelon;
-    bool handicape;
+    bool handicap;
 } Etudiant;
 
-/* Fonctions */
+/* Prototypes */
 
 char* getCivilite(Civilite civilite);
 char* getEchelon(Echelon echelon);
 Etudiant lireEtudiant(FILE* flot);
-bool isBoursier(Etudiant etud);
