@@ -14,7 +14,7 @@ typedef struct {
 	TypeLogement typeLogement;
 } Demande;
 
-/* Fonctions */
+/* Prototypes */
 
 char* getEchelon(Echelon echelon)
 char* getTypeLogement(TypeLogement typeLogement);
