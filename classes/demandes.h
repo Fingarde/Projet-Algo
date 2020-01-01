@@ -4,7 +4,7 @@
 #include "etudiants.h"
 #include "logements.h"
 
-/* Structures */
+/* Structure */
 
 typedef struct {
 	int idDemande;
