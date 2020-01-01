@@ -18,14 +18,12 @@ Logement lireLogement(FILE* flot) {
     int tailleNomCite;
     char typeLoge[8];
 
-    loge.idEtudiant = -1;
-
     fscanf(flot, "%d%*c", &loge.idLogement);
 
     fgets(nomCite, 65, flot);
     tailleNomCite = strlen(nomCite);
-    if(nomCite[tailleNomCite - 2] == '\n') {
-        nomCite[tailleNomCite - 2] = '\0';
+    if(nomCite[tailleNomCite - 1] == '\n') {
+        nomCite[tailleNomCite - 1] = '\0';
         tailleNomCite--;
     }
     loge.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
@@ -36,14 +34,12 @@ Logement lireLogement(FILE* flot) {
     strcpy(loge.nomCite, nomCite);
 
     typeLoge = getTypeLogement(type);
-
-    fscanf(flot, "%d%*c", &loge.typeLogement);
     
-    // Booléen disponible
+    fscanf(flot, "%d%*c", &loge.disponible);
 
-    // Booléen adapté handicapé
+    fscanf(flot, "%d%*c", &loge.adapteHandicap);
 
-    if (loge.disponible == 0) {
+    if (!loge.disponible) {
         fscanf(flot, "%d%*c", &loge.idEtudiant);
     }
 
