@@ -17,18 +17,18 @@ char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de cara
 
 Demande lireDemande (FILE* flot) {
 	Demande dema;
-    	Echelon eche;
-    	TypeLogement typeLoge;
+    Echelon eche;
+    TypeLogement typeLoge;
 
-    	char echelon[5];
+    char echelon[5];
 	char nomCite[65];
    	int tailleNomCite;
-    	char typeLoge[8];
+    char typeLoge[8];
 
 	fscanf(flot, "%d%*c", &dema.idDemande);
 	fscanf(flot, "%d%*c", &dema.idEtudiant);
 
-   	 echelon = getEchelon(eche);
+   	echelon = getEchelon(eche);
 
 	fgets(nomCite, 65, flot);
     tailleNomCite = strlen(nomCite);
