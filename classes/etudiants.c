@@ -31,8 +31,6 @@ Etudiant lireEtudiant(FILE* flot) {
 
     civilite = getCivilite(civi);
 
-    fscanf(flot, "%d%*c", &etud.civilite);
-
     fgets(nom, 65, flot);
     tailleNom = strlen(nom);
     if(nom[tailleNom - 2] == '\n') {
@@ -59,16 +57,12 @@ Etudiant lireEtudiant(FILE* flot) {
     }
     strcpy(etud.prenom, prenom);
 
-    echelon = getEchelon[eche];
-
-    // Booleen handicape
-
-    return etud;
-}
-
-bool isBoursier(Etudiant etud) {
-    if (etud.echelon) {
-        return true;
+    fscanf(flot, "%d%*c", &etud.bourse);
+    if (etud.bourse) {
+        echelon = getEchelon[eche];
     }
-    return false;
+
+    fscanf(flot, "%d%*c", &etud.handicap);
+    
+    return etud;
 }
