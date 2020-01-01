@@ -17,31 +17,31 @@ char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de cara
 
 Demande lireDemande (FILE* flot) {
 	Demande dema;
-    Echelon eche;
-    TypeLogement type;
+  Echelon eche;
+  TypeLogement type;
 
-    char echelon[5];
+  char echelon[5];
 	char nomCite[65];
-   	int tailleNomCite;
-    char typeLoge[8];
+  int tailleNomCite;
+  char typeLoge[8];
 
 	fscanf(flot, "%d%*c", &dema.idDemande);
 	fscanf(flot, "%d%*c", &dema.idEtudiant);
 
-   	echelon = getEchelon(eche);
+  echelon = getEchelon(eche);
 
 	fgets(nomCite, 65, flot);
-    	tailleNomCite = strlen(nomCite);
-    	if(nomCite[tailleNomCite - 2] == '\n') {
-    		nomCite[tailleNomCite - 2] = '\0';
-    		tailleNomCite--;
+  tailleNomCite = strlen(nomCite);
+  if(nomCite[tailleNomCite - 1] == '\n') {
+    nomCite[tailleNomCite - 1] = '\0';
+    tailleNomCite--;
 	}
 	dema.nomCite = (char*) malloc(sizeof(char) * tailleNomCite + 1);
-   	if (dema.nomCite == NULL) {
-       		printf("Problème d'allocation mémoire\n");
-      		exit(1);
-   	}
+  if (dema.nomCite == NULL) {
+    printf("Problème d'allocation mémoire\n");
+    exit(1);
+  }
 	strcpy(dema.nomCite, nomCite);
-
-    typeLoge = getTypeLogement(type);
+  
+  typeLoge = getTypeLogement(type);
 }
