@@ -18,7 +18,7 @@ char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de cara
 Demande lireDemande (FILE* flot) {
 	Demande dema;
     Echelon eche;
-    TypeLogement typeLoge;
+    TypeLogement type;
 
     char echelon[5];
 	char nomCite[65];
@@ -43,5 +43,5 @@ Demande lireDemande (FILE* flot) {
    	}
 	strcpy(dema.nomCite, nomCite);
 
-    typeLoge = getTypeLogement(typeLoge);
+    typeLoge = getTypeLogement(type);
 }
