@@ -10,4 +10,4 @@
 
 
 /* Prototypes */
-
+void affichMenu (void);
