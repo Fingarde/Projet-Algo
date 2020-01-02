@@ -63,7 +63,6 @@ int main() {
 	printf("Echelon de bourse: %s\n", getEchelon(dema.echelon));
 	printf("Nom cité: %s\n", dema.nomCite);
 
-
 	fclose(etudiantsDon);
 	fclose(logementsDon);
 	fclose(demandesDon);
