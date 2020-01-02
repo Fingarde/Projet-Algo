@@ -6,6 +6,8 @@
 
 #include "../enum/enum.h"
 
+/* Structure */
+
 // Étudiant
 typedef struct {
     int idEtudiant;
