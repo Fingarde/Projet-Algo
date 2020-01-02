@@ -9,6 +9,7 @@
 
 /* Structure */
 
+// Demande
 typedef struct {
 	int idDemande;
 	int idEtudiant;
