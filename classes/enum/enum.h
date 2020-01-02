@@ -22,6 +22,7 @@ typedef enum {
     AUCUN
 } Echelon;
 
+// Type logement
 typedef enum {
     CHAMBRE, 
     STUDIO,
