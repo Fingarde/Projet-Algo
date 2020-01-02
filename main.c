@@ -26,8 +26,8 @@ int main() {
 	logementsDon = fopen("fichiers/logements.don", "r");
 	demandesDon = fopen("fichiers/demandes.don", "r");
 	if(etudiantsDon == NULL || logementsDon == NULL || demandesDon == NULL) {
-		printf("Impossible d'ouvrir le fichier");
-		return 1;
+		printf("Impossible d'ouvrir les fichiers");
+		return 0;
   	}
 
 	etud = lireEtudiant(etudiantsDon);
