@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "enum.h"
+#include "../enum/enum.h"
 
 // Étudiant
 typedef struct {

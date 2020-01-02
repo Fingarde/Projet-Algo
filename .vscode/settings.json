@@ -7,6 +7,7 @@
         "logements.h": "c",
         "demandes.h": "c",
         "stdio.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "menu.h": "c"
     }
 }

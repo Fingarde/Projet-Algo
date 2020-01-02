@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "enum.h"
+#include "../enum/enum.h"
 
 Etudiant lireEtudiant(FILE* flot) {
     Etudiant etud;

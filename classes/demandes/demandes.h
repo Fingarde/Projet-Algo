@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "etudiants.h"
-#include "logements.h"
+#include "../etudiants/etudiants.h"
+#include "../logements/logements.h"
 
 /* Structure */
 

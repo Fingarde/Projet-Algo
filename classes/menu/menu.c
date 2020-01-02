@@ -1,8 +1,8 @@
-#include "crous.h"
+#include "menu.h"
 
 #include <stdio.h>
 
-void affichMenu (void) {
+void afficherMenuPrincipal() {
 	printf("-- Bienvenue sur le programme de demandes de logement du CROUS --\n");
 	printf("1 - Afficher la liste des logements disponibles\n");
 	printf("2 - Afficher la liste des logements occupés\n");

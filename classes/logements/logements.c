@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "enum.h"
+#include "../enum/enum.h"
 
 Logement lireLogement(FILE* flot) {
     Logement loge;

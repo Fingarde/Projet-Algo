@@ -5,8 +5,8 @@
 
 #include "demandes.h"
 
-#include "etudiants.h"
-#include "logements.h"
+#include "../etudiants/etudiants.h"
+#include "../logements/logements.h"
 
 Demande lireDemande (FILE* flot) {
 	Demande dema;
@@ -15,7 +15,6 @@ Demande lireDemande (FILE* flot) {
 
 	char nomCite[65];
   int tailleNomCite;
-
 
 	fscanf(flot, "%d%*c", &dema.idDemande);
 	fscanf(flot, "%d%*c", &dema.idEtudiant);

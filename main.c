@@ -1,12 +1,19 @@
 #include <stdio.h>
 
-#include "classes/etudiants.h"
-#include "classes/logements.h"
-#include "classes/demandes.h"
+#include "classes/etudiants/etudiants.h"
+#include "classes/logements/logements.h"
+#include "classes/demandes/demandes.h"
 
-#include "classes/enum.h"
+#include "classes/enum/enum.h"
+#include "classes/menu/menu.h"
 
 int main() {
+
+	afficherMenuPrincipal();
+
+	printf("\n-------\n\n");
+	printf("\n-------\n\n");
+
 	FILE* etudiantsDon;
 	FILE* logementsDon;
 	FILE* demandesDon;
