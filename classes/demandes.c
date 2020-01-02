@@ -8,16 +8,6 @@
 #include "etudiants.h"
 #include "logements.h"
 
-char echelonValues[8][5] = {"0bis", "01", "02", "03", "04", "05", "06", "07"}; // Chaine de caractères correspondant aux valeurs de l'enum
-char* getEchelon(Echelon echelon) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
-    return echelonValues[echelon];
-}
-
-char typeLogementValues[4][8] = {"Chambre", "Studio", "T1", "T2"}; // Chaine de caractères correspondant aux valeurs de l'enum
-char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
-    return typeLogementValues[typeLogement];
-}
-
 Demande lireDemande (FILE* flot) {
 	Demande dema;
   Echelon eche;
@@ -49,4 +39,6 @@ Demande lireDemande (FILE* flot) {
 	strcpy(dema.nomCite, nomCite);
   
   fscanf(flot, "%d%*c", &dema.typeLogement);
+
+  return dema;
 }

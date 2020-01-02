@@ -4,15 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-/* Structure et Énumération */
-
-// Type Logement
-typedef enum {
-    CHAMBRE, 
-    STUDIO,
-    T1,
-    T2
-} TypeLogement;
+#include "enum.h"
 
 // Logement
 typedef struct {

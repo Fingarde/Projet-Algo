@@ -1,9 +1,6 @@
-#include <stdbool.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "crous.h"
+
+#include <stdio.h>
 
 void affichMenu (void) {
 	printf("-- Bienvenue sur le programme de demandes de logement du CROUS --\n");

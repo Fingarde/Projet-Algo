@@ -1,21 +1,29 @@
 #include <stdio.h>
 
-#include "etudiants.h"
-#include "logements.h"
+#include "classes/etudiants.h"
+#include "classes/logements.h"
+#include "classes/demandes.h"
+
+#include "classes/enum.h"
 
 int main() {
-	FILE* fe;
+	FILE* etudiantsDon;
+	FILE* logementsDon;
+	FILE* demandesDon;
+
 	Etudiant etud;
 	Logement loge;
-	//Demande dema;
+	Demande dema;
 
-	fe = fopen("etudiants.don", "r");
-	if(fe == NULL) {
+	etudiantsDon = fopen("fichiers/etudiants.don", "r");
+	logementsDon = fopen("fichiers/logements.don", "r");
+	demandesDon = fopen("fichiers/demandes.don", "r");
+	if(etudiantsDon == NULL || logementsDon == NULL || demandesDon == NULL) {
 		printf("Impossible d'ouvrir le fichier");
 		return 1;
   	}
 
-	etud = lireEtudiant(fe);
+	etud = lireEtudiant(etudiantsDon);
 
 	printf("Etudiant N°%d\n", etud.idEtudiant);
 	printf("\n");
@@ -31,7 +39,7 @@ int main() {
 	
 	printf("\n-------\n\n");
 
-	loge = lireLogement(fe);
+	loge = lireLogement(logementsDon);
 
 	printf("Logement N°%d\n", loge.idLogement);
 	printf("\n");
@@ -45,14 +53,18 @@ int main() {
 	if(loge.adapteHandicap) printf("Est adapté pour les handicapés\n");
 	else printf("N'est pas adapté pour les handicapés\n");
 
-	/*dema = lireDemande(fe);
+	printf("\n-------\n\n");
+
+	dema = lireDemande(demandesDon);
 
 	printf("Demande N°%d\n", dema.idDemande);
 	printf("Etudiant N°%d\n", dema.idEtudiant);
 
 	printf("Echelon de bourse: %s\n", getEchelon(dema.echelon));
 	printf("Nom cité: %s\n", dema.nomCite);
-*/
 
-	fclose(fe);
+
+	fclose(etudiantsDon);
+	fclose(logementsDon);
+	fclose(demandesDon);
 }

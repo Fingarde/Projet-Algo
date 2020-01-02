@@ -1,10 +1,7 @@
-#ifndef ETUDIANTS_H
-#define ETUDIANTS_H
+#ifndef ENUM_H
+#define ENUM_H
 
-#include <stdio.h>
 #include <stdbool.h>
-
-/* Structure et Énumérations */
 
 // Civilité
 typedef enum {
@@ -25,22 +22,18 @@ typedef enum {
     AUCUN
 } Echelon;
 
-// Étudiant
-typedef struct {
-    int idEtudiant;
-    Civilite civilite;
-    char* nom;
-    char* prenom;
-    bool boursie;
-    Echelon echelon;
-    bool handicape;
-} Etudiant;
+typedef enum {
+    CHAMBRE, 
+    STUDIO,
+    T1,
+    T2
+} TypeLogement;
 
 /* Prototypes */
 
 char* getCivilite(Civilite civilite);
 char* getEchelon(Echelon echelon);
 char* getBoolean(bool boolean);
-Etudiant lireEtudiant(FILE* flot);
+char* getTypeLogement(TypeLogement typeLogement);
 
 #endif

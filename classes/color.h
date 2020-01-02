@@ -1,4 +1,5 @@
-/* Structure */
+#ifndef COLOR_H
+#define COLOR_H
 
 /*
     Color Codes
@@ -35,6 +36,8 @@ typedef enum {
     RESET
 } Color;
 
-/* Fonction */
+/* Prototypes */
 
 void setColor(Color color);
+
+#endif

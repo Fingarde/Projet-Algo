@@ -1,24 +1,11 @@
+#include "etudiants.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
-#include "etudiants.h"
-
-char civiliteValues[2][4] = {"Mr", "Mme"}; // Chaine de caractères correspondant aux valeurs de l'enum
-char* getCivilite(Civilite civilite) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
-    return civiliteValues[civilite];
-}
-
-char echelonValues[9][5] = {"0bis", "01", "02", "03", "04", "05", "06", "07", "Aucun"}; // Chaine de caractères correspondant aux valeurs de l'enum
-char* getEchelon(Echelon echelon) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
-    return echelonValues[echelon];
-}
-
-char boolValues[2][4] = {"Non", "Oui"}; // Chaine de caractères correspondant aux valeurs de l'enum
-char* getBoolean(bool boolean) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
-    return boolValues[boolean];
-}
+#include "enum.h"
 
 Etudiant lireEtudiant(FILE* flot) {
     Etudiant etud;

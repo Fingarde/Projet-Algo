@@ -1,14 +1,11 @@
+#include "logements.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
-#include "logements.h"
-
-char typeLogementValues[4][8] = {"Chambre", "Studio", "T1", "T2"}; // Chaine de caractères correspondant aux valeurs de l'enum
-char* getTypeLogement(TypeLogement typeLogement) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
-    return typeLogementValues[typeLogement];
-}
+#include "enum.h"
 
 Logement lireLogement(FILE* flot) {
     Logement loge;
