@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdbool.h": "c",
+        "cstdbool": "c",
+        "c++config.h": "c",
+        "etudiants.h": "c",
+        "logements.h": "c",
+        "demandes.h": "c"
+    }
+}

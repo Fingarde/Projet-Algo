@@ -1,3 +1,6 @@
+#ifndef LOGEMENTS_H
+#define LOGEMENTS_H
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -25,3 +28,5 @@ typedef struct {
 
 char* getTypeLogement(TypeLogement typeLogement);
 Logement lireLogement(FILE* flot);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef ETUDIANTS_H
+#define ETUDIANTS_H
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -39,3 +42,5 @@ char* getCivilite(Civilite civilite);
 char* getEchelon(Echelon echelon);
 char* getBoolean(bool boolean);
 Etudiant lireEtudiant(FILE* flot);
+
+#endif
