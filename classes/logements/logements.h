@@ -16,6 +16,15 @@ typedef struct {
     int idEtudiant;
 } Logement;
 
+// Maillon d'un logement
+typedef struct maillon {
+	Logement logement;
+	struct maillon* suiv;
+} MaillonLoge;
+
+// Liste logements
+typedef MaillonLoge* ListeLogement;
+
 /* Prototypes */
 
 char* getTypeLogement(TypeLogement typeLogement);
