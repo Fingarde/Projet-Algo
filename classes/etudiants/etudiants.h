@@ -19,7 +19,17 @@ typedef struct {
     bool handicape;
 } Etudiant;
 
+typedef struct MailleEtud {
+    Etudiant etudiant;
+    struct MailleEtud* suivant;
+} MaillonEtudiant;
+
+typedef MaillonEtudiant* ListeEtudiants;
+
+
 /* Prototypes */
 Etudiant lireEtudiant(FILE* flot);
+ListeEtudiants ajouter(ListeEtudiants listeEtudiants, Etudiant etudiant);
+void afficherEtudiant(Etudiant etud);
 
 #endif

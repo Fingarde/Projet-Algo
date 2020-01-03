@@ -72,6 +72,6 @@
 #define BHWHT "\e[1;97m"
 
 //Reset
-#define reset "\e[0m"
+#define RESET "\e[0m"
 
 #endif

@@ -8,10 +8,7 @@
 #include "classes/menu/menu.h"
 
 int main() {
-	choixMenuPrincipal();
-
-	printf("\n-------\n\n");
-	printf("\n-------\n\n");
+	//choixMenuPrincipal();
 
 	FILE* etudiantsDon;
 	FILE* logementsDon;
@@ -21,6 +18,9 @@ int main() {
 	Logement loge;
 	Demande dema;
 
+	ListeEtudiants etudiants;
+	int nbEtudiants;
+
 	etudiantsDon = fopen("fichiers/etudiants.don", "r");
 	logementsDon = fopen("fichiers/logements.don", "r");
 	demandesDon = fopen("fichiers/demandes.don", "r");
@@ -29,6 +29,31 @@ int main() {
 		return 0;
   	}
 
+	etud = lireEtudiant(etudiantsDon);
+	etudiants = ajouter(etudiants, etud);
+
+	while(feof(etudiantsDon) == 0) {
+		etud = lireEtudiant(etudiantsDon);
+		etudiants = ajouter(etudiants, etud);
+	}
+
+	ListeEtudiants etudTmp = etudiants;
+	while(etudTmp != NULL) {
+		afficherEtudiant(etudTmp->etudiant);
+		etudTmp = etudTmp->suivant;
+	}
+
+
+
+
+
+
+
+
+
+
+
+/*
 	etud = lireEtudiant(etudiantsDon);
 
 	printf("Etudiant N°%d\n", etud.idEtudiant);
@@ -68,7 +93,7 @@ int main() {
 
 	printf("Echelon de bourse: %s\n", getEchelon(dema.echelon));
 	printf("Nom cité: %s\n", dema.nomCite);
-
+*/
 	fclose(etudiantsDon);
 	fclose(logementsDon);
 	fclose(demandesDon);

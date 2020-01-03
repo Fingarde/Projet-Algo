@@ -6,6 +6,7 @@
 #include <stdbool.h>
 
 #include "../enum/enum.h"
+#include "../color/color.h"
 
 Etudiant lireEtudiant(FILE* flot) {
     Etudiant etud;
@@ -61,4 +62,50 @@ Etudiant lireEtudiant(FILE* flot) {
     fscanf(flot, "%d%*c", &etud.handicape);
     
     return etud;
+}
+
+ListeEtudiants ajouter(ListeEtudiants listeEtudiants, Etudiant etudiant) {
+	MaillonEtudiant* tmp;
+
+    int taillePrenom, tailleNom;
+
+	
+	tmp = (MaillonEtudiant*) malloc(sizeof(MaillonEtudiant));
+    if(tmp == NULL) {
+        printf("Problème mémoire");
+        exit(1);
+    }
+
+    tmp->etudiant.idEtudiant = etudiant.idEtudiant;
+    tmp->etudiant.civilite = etudiant.civilite;
+
+    tailleNom = strlen(etudiant.nom);
+    tmp->etudiant.nom = (char*) malloc(sizeof(char) * tailleNom + 1);
+    strcpy(tmp->etudiant.nom, etudiant.nom);
+
+    taillePrenom = strlen(etudiant.prenom);
+    tmp->etudiant.prenom = (char*) malloc(sizeof(char) * taillePrenom + 1);
+    strcpy(tmp->etudiant.prenom, etudiant.prenom);
+
+    tmp->etudiant.boursie = etudiant.boursie;
+    tmp->etudiant.echelon = etudiant.echelon;
+    tmp->etudiant.handicape = etudiant.handicape;
+    
+    tmp->suivant = listeEtudiants;
+	
+	return tmp;
+}
+
+void afficherEtudiant(Etudiant etud) {
+    printf(RED "Etudiant N°%d\n" RESET, etud.idEtudiant);
+	printf("\n");
+	printf("%s %s\n", etud.nom, etud.prenom);
+	printf("\n");
+	printf("Civilité: %s\n", getCivilite(etud.civilite));
+
+	if(etud.handicape) printf("Est handicapé\n");
+	else printf("N'est pas handicapé\n");
+	
+	if(etud.boursie) printf("Echelon de bourse: %s\n", getEchelon(etud.echelon));
+	else printf("N'est pas boursier\n");
 }

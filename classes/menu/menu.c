@@ -23,11 +23,11 @@ void choixMenuPrincipal() {
 
 	afficherMenuPrincipal();
 
-	printf(BOLD_GREEN "Choix : " BOLD_CYAN);
-	scanf("%d", &valMenu);
+	printf(BOLD_GREEN "Choix: " BOLD_CYAN);
+	scanf("%d%*c", &valMenu);
 
 	switch (valMenu) {
-		case 1 :
+		case 1:
 			break;
 
 		default:
