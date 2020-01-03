@@ -12,3 +12,21 @@ void afficherMenuPrincipal() {
 	printf("6 - Libérer un logement\n");
 	printf("7 - Quitter le programme\n");
 }
+
+void choix() {
+	int valMenu;
+
+	afficherMenuPrincipal();
+
+	printf("Choix : ");
+	scanf("%d", &valMenu);
+
+	switch (valMenu) {
+		case 1 :
+			break;
+
+		default:
+			choix();
+			break;
+	}
+}

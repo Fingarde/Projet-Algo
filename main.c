@@ -8,18 +8,7 @@
 #include "classes/menu/menu.h"
 
 int main() {
-	int valMenu;
-
-	afficherMenuPrincipal();
-
-	printf("Choix : ");
-	scanf("%d", &valMenu);
-
-	switch (valMenu) {
-		case 1 :
-			
-		break;
-	}
+	choix();
 
 	printf("\n-------\n\n");
 	printf("\n-------\n\n");
