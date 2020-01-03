@@ -2,23 +2,28 @@
 
 #include <stdio.h>
 
+#include "../color/color.h"
+
 void afficherMenuPrincipal() {
-	printf("-- Bienvenue sur le programme de demandes de logement du CROUS --\n");
-	printf("1 - Afficher la liste des logements disponibles\n");
-	printf("2 - Afficher la liste des logements occupés\n");
-	printf("3 - Afficher la liste des demandes de logements en attente\n");
-	printf("4 - Saisir une nouvelle demande de logements\n");
-	printf("5 - Annuler une demande de logements\n");
-	printf("6 - Libérer un logement\n");
-	printf("7 - Quitter le programme\n");
+	printf(BOLD_RED "▬▬  " BOLD_YELLOW "Bienvenue sur le programme de demandes de logement du CROUS" BOLD_RED "  ▬▬\n");
+	printf("\n");
+	printf(BOLD_YELLOW "1» " BOLD_WHITE "Afficher la liste des logements disponibles\n");
+	printf(BOLD_YELLOW "2» " BOLD_WHITE "Afficher la liste des logements occupés\n");
+	printf(BOLD_YELLOW "3» " BOLD_WHITE "Afficher la liste des demandes de logements en attente\n");
+	printf("\n");
+	printf(BOLD_YELLOW "4» " BOLD_WHITE "Saisir une nouvelle demande de logements\n");
+	printf(BOLD_YELLOW "5» " BOLD_WHITE "Annuler une demande de logements\n");
+	printf(BOLD_YELLOW "6» " BOLD_WHITE "Libérer un logement\n");
+	printf("\n");
+	printf(BOLD_YELLOW "9» " BOLD_WHITE "Quitter le programme\n");
 }
 
-void choix() {
+void choixMenuPrincipal() {
 	int valMenu;
 
 	afficherMenuPrincipal();
 
-	printf("Choix : ");
+	printf(BOLD_GREEN "Choix : " BOLD_CYAN);
 	scanf("%d", &valMenu);
 
 	switch (valMenu) {
@@ -26,7 +31,7 @@ void choix() {
 			break;
 
 		default:
-			choix();
+			choixMenuPrincipal();
 			break;
 	}
 }

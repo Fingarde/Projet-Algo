@@ -3,5 +3,6 @@
 
 /* Prototypes */
 void afficherMenuPrincipal();
+void choixMenuPrincipal();
 
 #endif

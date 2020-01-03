@@ -8,7 +8,7 @@
 #include "classes/menu/menu.h"
 
 int main() {
-	choix();
+	choixMenuPrincipal();
 
 	printf("\n-------\n\n");
 	printf("\n-------\n\n");
