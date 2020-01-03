@@ -28,6 +28,7 @@ int main() {
   	}
 
 	etudiants = chargementEtudiants(etudiantsDon);
+
 	ListeEtudiants etudTmp = etudiants;
 	while(etudTmp != NULL) {
 		afficherEtudiant(etudTmp->etudiant);

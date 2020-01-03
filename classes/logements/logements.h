@@ -17,17 +17,19 @@ typedef struct {
 } Logement;
 
 // Maillon d'un logement
-typedef struct maillon {
+typedef struct MailleLoge {
 	Logement logement;
-	struct maillon* suiv;
+	struct MailleLoge* suivant;
 } MaillonLoge;
 
 // Liste logements
-typedef MaillonLoge* ListeLogement;
+typedef MaillonLoge* ListeLogements;
 
 /* Prototypes */
 
 char* getTypeLogement(TypeLogement typeLogement);
 Logement lireLogement(FILE* flot);
+ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement logement);
+ListeLogements chargementLogements(FILE* fe);
 
 #endif
