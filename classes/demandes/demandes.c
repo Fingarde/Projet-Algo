@@ -10,20 +10,20 @@
 
 Demande lireDemande (FILE* flot) {
 	Demande dema;
-  Echelon eche;
-  TypeLogement type;
 
 	char nomCite[65];
   int tailleNomCite;
 
-	fscanf(flot, "%d%*c", &dema.idDemande);
+  // ID Demande
+	fscanf(flot, "%d%*c", &dema.idDemande); 
+  // ID Étudiant
 	fscanf(flot, "%d%*c", &dema.idEtudiant);
-
+  // Échelon bourse
   fscanf(flot, "%d%*c", &dema.echelon);
 
+  // Nom cité
 	fgets(nomCite, 65, flot);
   tailleNomCite = strlen(nomCite);
-  
   if(nomCite[tailleNomCite - 1] == '\n') {
     nomCite[tailleNomCite - 1] = '\0';
     tailleNomCite--;
@@ -34,9 +34,9 @@ Demande lireDemande (FILE* flot) {
     printf("Problème d'allocation mémoire\n");
     exit(1);
   }
-
-	strcpy(dema.nomCite, nomCite);
+  strcpy(dema.nomCite, nomCite);
   
+  // Type logement
   fscanf(flot, "%d%*c", &dema.typeLogement);
 
   return dema;
