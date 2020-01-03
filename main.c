@@ -14,12 +14,10 @@ int main() {
 	FILE* logementsDon;
 	FILE* demandesDon;
 
-	Etudiant etud;
 	Logement loge;
 	Demande dema;
 
 	ListeEtudiants etudiants;
-	int nbEtudiants;
 
 	etudiantsDon = fopen("fichiers/etudiants.don", "r");
 	logementsDon = fopen("fichiers/logements.don", "r");
@@ -29,17 +27,11 @@ int main() {
 		return 0;
   	}
 
-	etud = lireEtudiant(etudiantsDon);
-	etudiants = ajouter(etudiants, etud);
-
-	while(feof(etudiantsDon) == 0) {
-		etud = lireEtudiant(etudiantsDon);
-		etudiants = ajouter(etudiants, etud);
-	}
-
+	etudiants = chargementEtudiants(etudiantsDon);
 	ListeEtudiants etudTmp = etudiants;
 	while(etudTmp != NULL) {
 		afficherEtudiant(etudTmp->etudiant);
+		printf("\n");
 		etudTmp = etudTmp->suivant;
 	}
 

@@ -8,6 +8,7 @@
 #include "../enum/enum.h"
 #include "../color/color.h"
 
+
 Etudiant lireEtudiant(FILE* flot) {
     Etudiant etud;
 
@@ -64,12 +65,11 @@ Etudiant lireEtudiant(FILE* flot) {
     return etud;
 }
 
-ListeEtudiants ajouter(ListeEtudiants listeEtudiants, Etudiant etudiant) {
+ListeEtudiants ajouterEtudiantListe(ListeEtudiants listeEtudiants, Etudiant etudiant) {
 	MaillonEtudiant* tmp;
 
     int taillePrenom, tailleNom;
 
-	
 	tmp = (MaillonEtudiant*) malloc(sizeof(MaillonEtudiant));
     if(tmp == NULL) {
         printf("Problème mémoire");
@@ -96,16 +96,30 @@ ListeEtudiants ajouter(ListeEtudiants listeEtudiants, Etudiant etudiant) {
 	return tmp;
 }
 
-void afficherEtudiant(Etudiant etud) {
-    printf(RED "Etudiant N°%d\n" RESET, etud.idEtudiant);
-	printf("\n");
-	printf("%s %s\n", etud.nom, etud.prenom);
-	printf("\n");
-	printf("Civilité: %s\n", getCivilite(etud.civilite));
-
-	if(etud.handicape) printf("Est handicapé\n");
-	else printf("N'est pas handicapé\n");
+ListeEtudiants chargementEtudiants(FILE* fe) {
+	ListeEtudiants etudiants = NULL;
+	Etudiant etud;
 	
-	if(etud.boursie) printf("Echelon de bourse: %s\n", getEchelon(etud.echelon));
-	else printf("N'est pas boursier\n");
+	etud = lireEtudiant(fe);
+	etudiants = ajouterEtudiantListe(etudiants, etud);
+
+	while(feof(fe) == 0) {
+		etud = lireEtudiant(fe);
+		etudiants = ajouterEtudiantListe(etudiants, etud);
+	}
+
+	return etudiants;
+}
+
+void afficherEtudiant(Etudiant etud) {
+    printf(UNDERLINE_YELLOW BOLD_YELLOW "Etudiant N°%d\n" RESET, etud.idEtudiant);
+
+	printf(BOLD_BLUE "%s %s\n" RESET, etud.nom, etud.prenom);
+	printf(BOLD_CYAN "Civilité: %s%s\n" RESET, etud.civilite == 0 ? BOLD_CYAN : BOLD_MAGENTA, getCivilite(etud.civilite));
+
+	if(etud.handicape) printf(BOLD_RED "Est handicapé\n" RESET);
+	else printf(BOLD_GREEN "N'est pas handicapé\n" RESET);
+	
+	if(etud.boursie) printf(BOLD_GREEN "Echelon de bourse: %s\n" RESET, getEchelon(etud.echelon));
+	else printf(BOLD_RED "N'est pas boursier\n" RESET);
 }
