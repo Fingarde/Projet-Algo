@@ -9,16 +9,15 @@
 
 Logement lireLogement(FILE* flot) {
     Logement loge;
-    TypeLogement type;
-
     char nomCite[65];
     int tailleNomCite;
 
+    // ID Logement
     fscanf(flot, "%d%*c", &loge.idLogement);
 
+    // Nom cité
     fgets(nomCite, 65, flot);
     tailleNomCite = strlen(nomCite);
-
     if(nomCite[tailleNomCite - 1] == '\n') {
         nomCite[tailleNomCite - 1] = '\0';
         tailleNomCite--;
@@ -29,16 +28,19 @@ Logement lireLogement(FILE* flot) {
         printf("Problème d'allocation mémoire\n");
         exit(1);
     }
-    
     strcpy(loge.nomCite, nomCite);
 
+    // Type logement
     fscanf(flot, "%d%*c", &loge.typeLogement);
     
+    // Disponibilité logement
     fscanf(flot, "%d%*c", &loge.disponible);
 
+    // Adapté pour les personnes handicapés
     fscanf(flot, "%d%*c", &loge.adapteHandicap);
 
     if (!loge.disponible) {
+        // ID Étudiant
         fscanf(flot, "%d%*c", &loge.idEtudiant);
     }
 
