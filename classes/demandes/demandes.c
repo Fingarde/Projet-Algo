@@ -7,6 +7,7 @@
 
 #include "../etudiants/etudiants.h"
 #include "../logements/logements.h"
+#include "../color/color.h"
 
 Demande lireDemande (FILE* flot) {
 	Demande dema;
@@ -40,4 +41,56 @@ Demande lireDemande (FILE* flot) {
   fscanf(flot, "%d%*c", &dema.typeLogement);
 
   return dema;
+}
+
+ListeDemandes ajouterDemandeListe(ListeDemandes listeDemandes, Demande demande) {
+  MaillonDemande* tmp;
+
+  int tailleCite;
+
+  tmp = (MaillonDemande*) malloc(sizeof(MaillonDemande));
+  if(tmp == NULL) {
+      printf("Problème mémoire");
+      exit(1);
+  }
+
+  tmp->demande.idDemande = demande.idDemande;
+
+  tailleCite = strlen(demande.nomCite);
+  tmp->demande.nomCite = (char*) malloc(sizeof(char) * tailleCite + 1);
+  strcpy(tmp->demande.nomCite, demande.nomCite);
+
+  tmp->demande.typeLogement = demande.typeLogement;
+  tmp->demande.idEtudiant = demande.idEtudiant;
+  tmp->demande.echelon = demande.echelon;
+
+  tmp->suivant = listeDemandes;
+
+	return tmp;
+}
+
+ListeDemandes chargementDemandes(FILE* fe) {
+	ListeDemandes demandes = NULL;
+	Demande dema;
+	
+	dema = lireDemande(fe);
+	demandes = ajouterDemandeListe(demandes, dema);
+
+	while(feof(fe) == 0) {
+		dema = lireDemande(fe);
+		demandes = ajouterDemandeListe(demandes, dema);
+	}
+
+	return demandes;
+}
+
+void afficherDemande(Demande dema) {
+  printf(UNDERLINE_YELLOW BOLD_YELLOW "Demande N°%d\n" RESET, dema.idDemande);
+
+  printf(BOLD_GREEN "Etudiant N°%d\n" RESET, dema.idEtudiant);
+  printf(BOLD_CYAN "Echelon %s\n" RESET, getEchelon(dema.echelon));
+  
+  printf(BOLD_BLUE "%s\n" RESET, dema.nomCite);
+
+  printf(BOLD_MAGENTA "%s\n" RESET, getTypeLogement(dema.typeLogement));
 }

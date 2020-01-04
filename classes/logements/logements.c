@@ -51,11 +51,11 @@ Logement lireLogement(FILE* flot) {
 }
 
 ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement logement) {
-	MaillonLoge* tmp;
+	MaillonLogement* tmp;
 
     int tailleCite;
 
-	tmp = (MaillonLoge*) malloc(sizeof(MaillonLoge));
+	tmp = (MaillonLogement*) malloc(sizeof(MaillonLogement));
     if(tmp == NULL) {
         printf("Problème mémoire");
         exit(1);
@@ -104,6 +104,5 @@ void afficherLogement(Logement loge) {
 
     if(loge.adapteHandicap) printf(BOLD_RED "Est adapté pour les handicapés\n" RESET);
 	else printf(BOLD_GREEN "N'est pas adapté pour les handicapés\n" RESET);
-	
 
 }

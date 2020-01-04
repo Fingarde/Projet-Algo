@@ -20,10 +20,10 @@ typedef struct {
 typedef struct MailleLoge {
 	Logement logement;
 	struct MailleLoge* suivant;
-} MaillonLoge;
+} MaillonLogement;
 
 // Liste logements
-typedef MaillonLoge* ListeLogements;
+typedef MaillonLogement* ListeLogements;
 
 /* Prototypes */
 

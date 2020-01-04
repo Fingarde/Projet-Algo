@@ -18,10 +18,18 @@ typedef struct {
 	TypeLogement typeLogement;
 } Demande;
 
+typedef struct MailleDema {
+    Demande demande;
+    struct MailleDema* suivant;
+} MaillonDemande;
+
+typedef MaillonDemande* ListeDemandes;
+
 /* Prototypes */
 
-char* getEchelon(Echelon echelon);
-char* getTypeLogement(TypeLogement typeLogement);
 Demande lireDemande (FILE* flot);
+ListeDemandes ajouterDemandeListe(ListeDemandes listeDemandes, Demande demande);
+ListeDemandes chargementDemandes(FILE* fe);
+void afficherDemande(Demande dema);
 
 #endif

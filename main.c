@@ -14,11 +14,9 @@ int main() {
 	FILE* logementsDon;
 	FILE* demandesDon;
 
-	Logement loge;
-	Demande dema;
-
 	ListeEtudiants etudiants;
 	ListeLogements logements;
+	ListeDemandes demandes;
 
 	etudiantsDon = fopen("fichiers/etudiants.don", "r");
 	logementsDon = fopen("fichiers/logements.don", "r");
@@ -50,6 +48,18 @@ int main() {
 		logeTmp = logeTmp->suivant;
 	}
 
+	printf("\n\n");
+
+
+	demandes = chargementDemandes(demandesDon);
+
+	ListeDemandes demaTmp = demandes;
+	while(demaTmp != NULL) {
+		afficherDemande(demaTmp->demande);
+
+		printf("\n");
+		demaTmp = demaTmp->suivant;
+	}
 
 
 
