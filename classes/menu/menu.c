@@ -4,6 +4,10 @@
 
 #include "../color/color.h"
 
+#include "../etudiants/etudiants.h"
+#include "../logements/logements.h"
+#include "../demandes/demandes.h"
+
 void afficherMenuPrincipal() {
 	printf(BOLD_RED "▬▬  " BOLD_YELLOW "Bienvenue sur le programme de demandes de logement du CROUS" BOLD_RED "  ▬▬\n");
 	printf("\n");
@@ -18,7 +22,7 @@ void afficherMenuPrincipal() {
 	printf(BOLD_YELLOW "9» " BOLD_WHITE "Quitter le programme\n");
 }
 
-void choixMenuPrincipal() {
+void choixMenuPrincipal(ListeEtudiants listeEtudiants, ListeLogements listeLogements, ListeDemandes listeDemandes) {
 	int valMenu;
 
 	afficherMenuPrincipal();
@@ -28,10 +32,22 @@ void choixMenuPrincipal() {
 
 	switch (valMenu) {
 		case 1:
+			afficherListeLogementsDispo(listeLogements);
 			break;
-
 		default:
-			choixMenuPrincipal();
+			choixMenuPrincipal(listeEtudiants, listeLogements, listeDemandes);
 			break;
+	}
+}
+
+void afficherListeLogementsDispo(ListeLogements listeLogements) {
+	ListeLogements logeTmp = listeLogements;
+
+	while(logeTmp != NULL) {
+		if(logeTmp->logement.disponible) {
+			afficherLogement(logeTmp->logement);
+		}
+		printf("\n");
+		logeTmp = logeTmp->suivant;
 	}
 }

@@ -104,5 +104,34 @@ void afficherLogement(Logement loge) {
 
     if(loge.adapteHandicap) printf(BOLD_RED "Est adapté pour les handicapés\n" RESET);
 	else printf(BOLD_GREEN "N'est pas adapté pour les handicapés\n" RESET);
+}
 
+
+/*
+void trierParNomCite(ListeLogements listeLogements) {
+    if(listeLogements == NULL) return;
+
+    ListeLogements value = listeLogements;
+
+    ListeLogements premier = listeLogements;
+    ListeLogements suivants = listeLogements;
+
+    while (suivants != NULL && strcmp(value->logement.nomCite, suivants->logement.nomCite) > 0) {
+        suivants = suivants->suivant;
+    }
+
+    if(listeLogements != suivants) {
+        value->suivant = suivants->suivant;
+        suivants->suivant = value;
+    }
+
+    trierParNomCite(listeLogements->suivant);
+}
+**/
+void ajouter(ListeLogements listeLogements, Logement Logement) {
+    while (listeLogements->suivant != NULL)
+    {
+        /* code */ // J AI EU LA FLEMME JE FINI DEMAIN
+    }
+    
 }
