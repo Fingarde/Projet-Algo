@@ -94,4 +94,16 @@ ListeLogements chargementLogements(FILE* fe) {
 
 void afficherLogement(Logement loge) {
     printf(UNDERLINE_YELLOW BOLD_YELLOW "Logement N°%d\n" RESET, loge.idLogement);
+   
+	printf(BOLD_BLUE "%s\n" RESET, loge.nomCite);
+
+    printf(BOLD_CYAN "%s\n" RESET, getTypeLogement(loge.typeLogement));
+
+	if(loge.disponible) printf(BOLD_RED "Est disponible\n" RESET);
+	else printf(BOLD_GREEN "N'est pas disponible\n" RESET);
+
+    if(loge.adapteHandicap) printf(BOLD_RED "Est adapté pour les handicapés\n" RESET);
+	else printf(BOLD_GREEN "N'est pas adapté pour les handicapés\n" RESET);
+	
+
 }

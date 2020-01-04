@@ -18,6 +18,7 @@ int main() {
 	Demande dema;
 
 	ListeEtudiants etudiants;
+	ListeLogements logements;
 
 	etudiantsDon = fopen("fichiers/etudiants.don", "r");
 	logementsDon = fopen("fichiers/logements.don", "r");
@@ -36,7 +37,18 @@ int main() {
 		etudTmp = etudTmp->suivant;
 	}
 
+	printf("\n\n");
 
+
+	logements = chargementLogements(logementsDon);
+
+	ListeLogements logeTmp = logements;
+	while(logeTmp != NULL) {
+		afficherLogement(logeTmp->logement);
+
+		printf("\n");
+		logeTmp = logeTmp->suivant;
+	}
 
 
 
