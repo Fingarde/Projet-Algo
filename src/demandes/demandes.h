@@ -14,7 +14,7 @@ typedef struct {
 	int idDemande;
 	int idEtudiant;
 	Echelon echelon;
-	char* nomCite;
+	char* nomCite; // char 30 utiliser le tableau pour le fichier bibn
 	TypeLogement typeLogement;
 } Demande;
 

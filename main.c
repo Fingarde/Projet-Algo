@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-#include "classes/etudiants/etudiants.h"
-#include "classes/logements/logements.h"
-#include "classes/demandes/demandes.h"
+#include "src/etudiants/etudiants.h"
+#include "src/logements/logements.h"
+#include "src/demandes/demandes.h"
 
-#include "classes/enum/enum.h"
-#include "classes/menu/menu.h"
+#include "src/enum/enum.h"
+#include "src/menu/menu.h"
 
 int main() {
 	FILE* etudiantsDon;

@@ -9,6 +9,7 @@
 #include "../logements/logements.h"
 #include "../color/color.h"
 
+
 Demande lireDemande (FILE* flot) {
 	Demande dema;
 

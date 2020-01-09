@@ -65,6 +65,10 @@ Etudiant lireEtudiant(FILE* flot) {
     return etud;
 }
 
+ListeEtudiants creerListeVide() {
+    return NULL;
+}
+
 ListeEtudiants ajouterEtudiantListe(ListeEtudiants listeEtudiants, Etudiant etudiant) {
 	MaillonEtudiant* tmp;
 
@@ -97,7 +101,7 @@ ListeEtudiants ajouterEtudiantListe(ListeEtudiants listeEtudiants, Etudiant etud
 }
 
 ListeEtudiants chargementEtudiants(FILE* fe) {
-	ListeEtudiants etudiants = NULL;
+	ListeEtudiants etudiants = creerListeVide();
 	Etudiant etud;
 	
 	etud = lireEtudiant(fe);
