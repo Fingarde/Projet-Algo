@@ -112,3 +112,16 @@ void afficherLogement(Logement loge) {
 ListeLogements trierParNomCite(ListeLogements listeLogements) {
    // COMME EN ALGO
 }
+
+void sauvegardeLogements(ListeLogements logements, FILE* fe) {
+	if(logements == NULL) return;
+
+    fprintf(fe, "%d", logements->logement.idLogement);
+    fprintf(fe, "%s", logements->logement.nomCite);
+    fprintf(fe, "%d", logements->logement.typeLogement);
+    fprintf(fe, "%d", logements->logement.disponible);
+    fprintf(fe, "%d", logements->logement.adapteHandicap);
+    fprintf(fe, "%d", logements->logement.idEtudiant);
+
+    sauvegardeDemandes(logements->suivant, fe);
+}

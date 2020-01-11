@@ -18,7 +18,8 @@ int main() {
 	ListeLogements logements;
 	ListeDemandes demandes;
 
-	etudiantsDon = fopen("fichiers/etudiants.don", "wb");
+	//					CHARGEMENT
+	etudiantsDon = fopen("fichiers/etudiants.don", "rb");
 	logementsDon = fopen("fichiers/logements.don", "r");
 	demandesDon = fopen("fichiers/demandes.don", "r");
 	if(etudiantsDon == NULL || logementsDon == NULL || demandesDon == NULL) {
@@ -33,6 +34,23 @@ int main() {
 
 	fread(&nbEtudiants, sizeof(int), 1, etudiantsDon);
 	fread(etudiants, sizeof(Etudiant), nbEtudiants, etudiantsDon); 
+
+	fclose(etudiantsDon);
+	fclose(logementsDon);
+	fclose(demandesDon);
+
+
+
+	//					SAUVEGARDE			
+	etudiantsDon = fopen("fichiers/etudiants.don", "wb");
+	logementsDon = fopen("fichiers/logements.don", "w");
+	demandesDon = fopen("fichiers/demandes.don", "w");
+	if(etudiantsDon == NULL || logementsDon == NULL || demandesDon == NULL) {
+		printf("Impossible d'ouvrir les fichiers");
+		return 0;
+	}
+
+	sauvegardeDemandes(demandes, demandesDon);
 
 	fclose(etudiantsDon);
 	fclose(logementsDon);

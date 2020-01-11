@@ -12,8 +12,8 @@
 typedef struct {
     int idEtudiant;
     Civilite civilite;
-    char* nom;
-    char* prenom;
+    char nom[65];
+    char prenom[65];
     bool boursie;
     Echelon echelon;
     bool handicape;

@@ -31,5 +31,6 @@ Demande lireDemande (FILE* flot);
 ListeDemandes ajouterDemandeListe(ListeDemandes listeDemandes, Demande demande);
 ListeDemandes chargementDemandes(FILE* fe);
 void afficherDemande(Demande dema);
+void sauvegardeDemandes(ListeDemandes demandes, FILE* fe);
 
 #endif

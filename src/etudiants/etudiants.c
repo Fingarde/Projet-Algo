@@ -23,96 +23,28 @@ Etudiant lireEtudiant(FILE* flot) {
 
     fscanf(flot, "%d%*c", &etud.civilite); // Civilite
 
-    fgets(nom, 65, flot); // Nom
-    tailleNom = strlen(nom);
-    if(nom[tailleNom - 1] == '\n') {
-        nom[tailleNom - 1] = '\0';
+    fgets(etud.nom, 65, flot); // Nom
+    tailleNom = strlen(etud.nom);
+    if(etud.nom[tailleNom - 1] == '\n') {
+        etud.nom[tailleNom - 1] = '\0';
         tailleNom--;
     }
 
-    etud.nom = (char*) malloc(sizeof(char) * tailleNom + 1);
-    if (etud.nom == NULL) {
-        printf("Problème d'allocation de la mémoire\n");
-        exit(1);
-    }
-
-    strcpy(etud.nom, nom);
-
-
-    fgets(prenom, 65, flot); // Prenom
-    taillePrenom = strlen(prenom);
-
-    if(prenom[taillePrenom - 1] == '\n') {
-        prenom[taillePrenom - 1] = '\0';
+    fgets(etud.prenom, 65, flot); // Prenom
+    taillePrenom = strlen(etud.prenom);
+    if(etud.prenom[taillePrenom - 1] == '\n') {
+        etud.prenom[taillePrenom - 1] = '\0';
         taillePrenom--;
     }
-
-    etud.prenom = (char*) malloc(sizeof(char) * taillePrenom + 1);
-    if (etud.prenom == NULL) {
-        printf("Problème d'allocation de la mémoire\n");
-        exit(1);
-    }
-
-    strcpy(etud.prenom, prenom);
 
     fscanf(flot, "%d%*c", &etud.boursie); // Boursier
     if(etud.boursie) {
         fscanf(flot, "%d%*c", &etud.echelon); // Echelon
     }
 
-    fscanf(flot, "%d%*c", &etud.handicape);
+    fscanf(flot, "%d%*c", &etud.handicape); // Handicape
     
     return etud;
-}
-
-ListeEtudiants creerListeVide() {
-    return NULL;
-}
-
-ListeEtudiants ajouterEtudiantListe(ListeEtudiants listeEtudiants, Etudiant etudiant) {
-	MaillonEtudiant* tmp;
-
-    int taillePrenom, tailleNom;
-
-	tmp = (MaillonEtudiant*) malloc(sizeof(MaillonEtudiant));
-    if(tmp == NULL) {
-        printf("Problème mémoire");
-        exit(1);
-    }
-
-    tmp->etudiant.idEtudiant = etudiant.idEtudiant;
-    tmp->etudiant.civilite = etudiant.civilite;
-
-    tailleNom = strlen(etudiant.nom);
-    tmp->etudiant.nom = (char*) malloc(sizeof(char) * tailleNom + 1);
-    strcpy(tmp->etudiant.nom, etudiant.nom);
-
-    taillePrenom = strlen(etudiant.prenom);
-    tmp->etudiant.prenom = (char*) malloc(sizeof(char) * taillePrenom + 1);
-    strcpy(tmp->etudiant.prenom, etudiant.prenom);
-
-    tmp->etudiant.boursie = etudiant.boursie;
-    tmp->etudiant.echelon = etudiant.echelon;
-    tmp->etudiant.handicape = etudiant.handicape;
-    
-    tmp->suivant = listeEtudiants;
-	
-	return tmp;
-}
-
-ListeEtudiants chargementEtudiants(FILE* fe) {
-	ListeEtudiants etudiants = creerListeVide();
-	Etudiant etud;
-	
-	etud = lireEtudiant(fe);
-	etudiants = ajouterEtudiantListe(etudiants, etud);
-
-	while(feof(fe) == 0) {
-		etud = lireEtudiant(fe);
-		etudiants = ajouterEtudiantListe(etudiants, etud);
-	}
-
-	return etudiants;
 }
 
 void afficherEtudiant(Etudiant etud) {
@@ -127,3 +59,4 @@ void afficherEtudiant(Etudiant etud) {
 	if(etud.boursie) printf(BOLD_GREEN "Echelon de bourse: %s\n" RESET, getEchelon(etud.echelon));
 	else printf(BOLD_RED "N'est pas boursier\n" RESET);
 }
+
