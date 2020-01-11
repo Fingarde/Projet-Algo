@@ -12,63 +12,28 @@ int main() {
 	FILE* logementsDon;
 	FILE* demandesDon;
 
-	ListeEtudiants etudiants;
+	Etudiant etudiants[300];
+	int nbEtudiants;
+
 	ListeLogements logements;
 	ListeDemandes demandes;
 
-	etudiantsDon = fopen("fichiers/etudiants.don", "r");
+	etudiantsDon = fopen("fichiers/etudiants.don", "wb");
 	logementsDon = fopen("fichiers/logements.don", "r");
 	demandesDon = fopen("fichiers/demandes.don", "r");
 	if(etudiantsDon == NULL || logementsDon == NULL || demandesDon == NULL) {
 		printf("Impossible d'ouvrir les fichiers");
 		return 0;
-  	}
-
-	etudiants = chargementEtudiants(etudiantsDon);
-	logements = chargementLogements(logementsDon);
-	demandes = chargementDemandes(demandesDon);
+	}
 	
-	choixMenuPrincipal(etudiants, logements, demandes);
-
-
-
-/*
-
-	etudiants = chargementEtudiants(etudiantsDon);
-
-	ListeEtudiants etudTmp = etudiants;
-	while(etudTmp != NULL) {
-		afficherEtudiant(etudTmp->etudiant);
-		printf("\n");
-		etudTmp = etudTmp->suivant;
-	}
-
-	printf("\n\n");
-
-
 	logements = chargementLogements(logementsDon);
-
-	ListeLogements logeTmp = logements;
-	while(logeTmp != NULL) {
-		afficherLogement(logeTmp->logement);
-
-		printf("\n");
-		logeTmp = logeTmp->suivant;
-	}
-
-	printf("\n\n");
-
-
 	demandes = chargementDemandes(demandesDon);
 
-	ListeDemandes demaTmp = demandes;
-	while(demaTmp != NULL) {
-		afficherDemande(demaTmp->demande);
+	choixMenuPrincipal(etudiants, nbEtudiants, logements, demandes);
 
-		printf("\n");
-		demaTmp = demaTmp->suivant;
-	}
-*/
+	fread(&nbEtudiants, sizeof(int), 1, etudiantsDon);
+	fread(etudiants, sizeof(Etudiant), nbEtudiants, etudiantsDon); 
+
 	fclose(etudiantsDon);
 	fclose(logementsDon);
 	fclose(demandesDon);

@@ -27,7 +27,6 @@ typedef MaillonLogement* ListeLogements;
 
 /* Prototypes */
 
-char* getTypeLogement(TypeLogement typeLogement);
 Logement lireLogement(FILE* flot);
 ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement logement);
 ListeLogements chargementLogements(FILE* fe);

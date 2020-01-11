@@ -35,10 +35,10 @@ Logement lireLogement(FILE* flot) {
 
     // Type logement
     fscanf(flot, "%d%*c", &loge.typeLogement);
-    
+
     // Disponibilité logement
     fscanf(flot, "%d%*c", &loge.disponible);
-
+ 
     // Adapté pour les personnes handicapés
     fscanf(flot, "%d%*c", &loge.adapteHandicap);
 
@@ -95,43 +95,20 @@ ListeLogements chargementLogements(FILE* fe) {
 void afficherLogement(Logement loge) {
     printf(UNDERLINE_YELLOW BOLD_YELLOW "Logement N°%d\n" RESET, loge.idLogement);
    
-	printf(BOLD_BLUE "%s\n" RESET, loge.nomCite);
+    printf(BOLD_WHITE "Ville: " BOLD_BLUE "%s\n" RESET, loge.nomCite);
 
-    printf(BOLD_CYAN "%s\n" RESET, getTypeLogement(loge.typeLogement));
+    printf(BOLD_WHITE "Type: " BOLD_CYAN "%s\n" RESET, getTypeLogement(loge.typeLogement));
 
-	if(loge.disponible) printf(BOLD_RED "Est disponible\n" RESET);
-	else printf(BOLD_GREEN "N'est pas disponible\n" RESET);
+    printf(BOLD_WHITE "Disponible: %s%s\n", loge.disponible ? GREEN : RED, getBoolean(loge.disponible));
 
-    if(loge.adapteHandicap) printf(BOLD_RED "Est adapté pour les handicapés\n" RESET);
-	else printf(BOLD_GREEN "N'est pas adapté pour les handicapés\n" RESET);
+    printf(BOLD_WHITE "Adapté handicapé: %s%s\n", loge.adapteHandicap ? GREEN : RED, getBoolean(loge.adapteHandicap));
+
+    if(!loge.disponible) printf(BOLD_WHITE  "Occupé par %d\n", loge.idEtudiant);
 }
 
+// Ajouter titer 
+// Ajouter en tete
 
-/*
-void trierParNomCite(ListeLogements listeLogements) {
-    if(listeLogements == NULL) return;
-
-    ListeLogements value = listeLogements;
-
-    ListeLogements premier = listeLogements;
-    ListeLogements suivants = listeLogements;
-
-    while (suivants != NULL && strcmp(value->logement.nomCite, suivants->logement.nomCite) > 0) {
-        suivants = suivants->suivant;
-    }
-
-    if(listeLogements != suivants) {
-        value->suivant = suivants->suivant;
-        suivants->suivant = value;
-    }
-
-    trierParNomCite(listeLogements->suivant);
-}
-**/
-void ajouter(ListeLogements listeLogements, Logement Logement) {
-    while (listeLogements->suivant != NULL)
-    {
-        /* code */ // J AI EU LA FLEMME JE FINI DEMAIN
-    }
-    
+ListeLogements trierParNomCite(ListeLogements listeLogements) {
+   // COMME EN ALGO
 }

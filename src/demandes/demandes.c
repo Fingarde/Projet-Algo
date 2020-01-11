@@ -85,7 +85,7 @@ ListeDemandes chargementDemandes(FILE* fe) {
 	return demandes;
 }
 
-void afficherDemande(Demande dema) {
+void afficherDemande (Demande dema) {
   printf(UNDERLINE_YELLOW BOLD_YELLOW "Demande N°%d\n" RESET, dema.idDemande);
 
   printf(BOLD_GREEN "Etudiant N°%d\n" RESET, dema.idEtudiant);

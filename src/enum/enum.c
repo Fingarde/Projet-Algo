@@ -12,7 +12,7 @@ char* getEchelon(Echelon echelon) { // Retourne la chaine de caractères corresp
     return echelonValues[echelon];
 }
 
-char boolValues[2][4] = {"Non", "Oui"}; // Chaine de caractères correspondant aux valeurs de l'enum
+char boolValues[2][4] = {"✘", "✔"}; // Chaine de caractères correspondant aux valeurs de l'enum
 char* getBoolean(bool boolean) { // Retourne la chaine de caractères correspondant a la valeur de l'enum
     return boolValues[boolean];
 }

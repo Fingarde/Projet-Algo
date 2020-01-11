@@ -22,7 +22,7 @@ void afficherMenuPrincipal() {
 	printf(BOLD_YELLOW "9» " BOLD_WHITE "Quitter le programme\n");
 }
 
-void choixMenuPrincipal(ListeEtudiants listeEtudiants, ListeLogements listeLogements, ListeDemandes listeDemandes) {
+void choixMenuPrincipal(Etudiant etudiants[], int nbEtudiants , ListeLogements listeLogements, ListeDemandes listeDemandes) {
 	int valMenu;
 
 	afficherMenuPrincipal();
@@ -30,24 +30,55 @@ void choixMenuPrincipal(ListeEtudiants listeEtudiants, ListeLogements listeLogem
 	printf(BOLD_GREEN "Choix: " BOLD_CYAN);
 	scanf("%d%*c", &valMenu);
 
-	switch (valMenu) {
-		case 1:
-			afficherListeLogementsDispo(listeLogements);
-			break;
-		default:
-			choixMenuPrincipal(listeEtudiants, listeLogements, listeDemandes);
-			break;
-	}
+	//while (valMenu != 9) {2
+		switch (valMenu) {
+			case 1:
+				afficherListeLogementsDispo(listeLogements);
+				break;
+			case 2:
+				afficherListeLogementsOccupe(listeLogements);
+				break;
+			case 3 :
+				afficherDemandesEnAttentes(listeDemandes); 
+				break;
+			default:
+				choixMenuPrincipal(etudiants, nbEtudiants, listeLogements, listeDemandes);
+				break;
+		}
+
+	// afficherMenuPrincipal();
+
+	// printf(BOLD_GREEN "Choix: " BOLD_CYAN);
+	// scanf("%d%*c", &valMenu);
+	//}
 }
 
 void afficherListeLogementsDispo(ListeLogements listeLogements) {
 	ListeLogements logeTmp = listeLogements;
-
 	while(logeTmp != NULL) {
-		if(logeTmp->logement.disponible) {
-			afficherLogement(logeTmp->logement);
+		if(logeTmp->logement.disponible) { // == 0
+			afficherLogement(logeTmp->logement); // Libre
 		}
 		printf("\n");
 		logeTmp = logeTmp->suivant;
 	}
+}
+
+void afficherListeLogementsOccupe(ListeLogements listeLogements) {
+	ListeLogements logeTmp = listeLogements;
+
+	while(logeTmp != NULL) {
+		if(!logeTmp->logement.disponible) { // == 1
+			afficherLogement(logeTmp->logement); // Occupé
+		}
+		printf("\n");
+		logeTmp = logeTmp->suivant;
+	}
+}
+
+void afficherDemandesEnAttentes (ListeDemandes listeDemandes) {
+	if(listeDemandes == NULL) return;
+
+  	afficherDemande(listeDemandes->demande);
+  	afficherDemandesEnAttentes (listeDemandes->suivant);
 }
