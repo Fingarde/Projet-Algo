@@ -8,6 +8,7 @@
 #include "../enum/enum.h"
 #include "../color/color.h"
 
+#include "../logements/logements.h"
 
 Etudiant lireEtudiant(FILE* flot) {
     Etudiant etud;
@@ -60,3 +61,13 @@ void afficherEtudiant(Etudiant etud) {
 	else printf(BOLD_RED "N'est pas boursier\n" RESET);
 }
 
+/*int supprimerEtudiant(ListeLogements logements, ) {
+
+}*/
+
+MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
+    if(logements == NULL) return NULL;
+
+    if(logements->logement.idEtudiant == etud.idEtudiant) return logements;
+    return getLogement(logements->suivant, etud);
+}

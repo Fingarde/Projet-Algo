@@ -19,18 +19,9 @@ typedef struct {
     bool handicape;
 } Etudiant;
 
-typedef struct MailleEtud {
-    Etudiant etudiant;
-    struct MailleEtud* suivant;
-} MaillonEtudiant;
-
-typedef MaillonEtudiant* ListeEtudiants;
-
-
 /* Prototypes */
 Etudiant lireEtudiant(FILE* flot);
-ListeEtudiants ajouterEtudiantListe(ListeEtudiants listeEtudiants, Etudiant etudiant);
-ListeEtudiants chargementEtudiants(FILE* fe);
 void afficherEtudiant(Etudiant etud);
+MaillonLogement* getLogement(ListeLogements logements, Etudiant etud)
 
 #endif
