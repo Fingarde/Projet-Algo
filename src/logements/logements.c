@@ -21,6 +21,8 @@ Logement lireLogement(FILE* flot) {
     // Nom cité
     fgets(nomCite, 65, flot);
     tailleNomCite = strlen(nomCite);
+
+
     if(nomCite[tailleNomCite - 1] == '\n') {
         nomCite[tailleNomCite - 1] = '\0';
         tailleNomCite--;
@@ -31,6 +33,7 @@ Logement lireLogement(FILE* flot) {
         printf("Problème d'allocation mémoire\n");
         exit(1);
     }
+
     strcpy(loge.nomCite, nomCite);
 
     // Type logement
@@ -95,7 +98,7 @@ ListeLogements chargementLogements(FILE* fe) {
 void afficherLogement(Logement loge) {
     printf(UNDERLINE_YELLOW BOLD_YELLOW "Logement N°%d\n" RESET, loge.idLogement);
    
-    printf(BOLD_WHITE "Ville: " BOLD_BLUE "%s\n" RESET, loge.nomCite);
+    printf(BOLD_WHITE "Cité: " BOLD_BLUE "%s\n" RESET, loge.nomCite);
 
     printf(BOLD_WHITE "Type: " BOLD_CYAN "%s\n" RESET, getTypeLogement(loge.typeLogement));
 
@@ -116,12 +119,16 @@ ListeLogements trierParNomCite(ListeLogements listeLogements) {
 void sauvegardeLogements(ListeLogements logements, FILE* fe) {
 	if(logements == NULL) return;
 
-    fprintf(fe, "%d", logements->logement.idLogement);
-    fprintf(fe, "%s", logements->logement.nomCite);
-    fprintf(fe, "%d", logements->logement.typeLogement);
-    fprintf(fe, "%d", logements->logement.disponible);
-    fprintf(fe, "%d", logements->logement.adapteHandicap);
-    fprintf(fe, "%d", logements->logement.idEtudiant);
-
     sauvegardeLogements(logements->suivant, fe);
+
+    if(logements->suivant != NULL) fprintf(fe, "\n");
+
+    fprintf(fe, "%d\n", logements->logement.idLogement);
+    fprintf(fe, "%s\n", logements->logement.nomCite);
+    fprintf(fe, "%d\n", logements->logement.typeLogement);
+    fprintf(fe, "%d\n", logements->logement.disponible);
+    fprintf(fe, "%d", logements->logement.adapteHandicap);
+
+    if(!logements->logement.disponible)
+        fprintf(fe, "\n%d", logements->logement.idEtudiant);
 }

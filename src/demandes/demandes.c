@@ -99,11 +99,13 @@ void afficherDemande(Demande dema) {
 void sauvegardeDemandes(ListeDemandes demandes, FILE* fe) {
 	if(demandes == NULL) return;
 
-    fprintf(fe, "%d", demandes->demande.idDemande);
-    fprintf(fe, "%d", demandes->demande.idEtudiant);
-    fprintf(fe, "%d", demandes->demande.echelon);
-    fprintf(fe, "%s", demandes->demande.nomCite);
-    fprintf(fe, "%d", demandes->demande.typeLogement);
+  	sauvegardeDemandes(demandes->suivant, fe);
 
-    sauvegardeDemandes(demandes->suivant, fe);
+  	if(demandes->suivant != NULL) fprintf(fe, "\n");
+
+    fprintf(fe, "%d\n", demandes->demande.idDemande);
+    fprintf(fe, "%d\n", demandes->demande.idEtudiant);
+    fprintf(fe, "%d\n", demandes->demande.echelon);
+    fprintf(fe, "%s\n", demandes->demande.nomCite);
+    fprintf(fe, "%d", demandes->demande.typeLogement);
 }

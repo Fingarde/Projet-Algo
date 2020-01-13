@@ -31,5 +31,7 @@ Logement lireLogement(FILE* flot);
 ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement logement);
 ListeLogements chargementLogements(FILE* fe);
 void afficherLogement(Logement loge);
+ListeLogements trierParNomCite(ListeLogements listeLogements);
+void sauvegardeLogements(ListeLogements logements, FILE* fe);
 
 #endif

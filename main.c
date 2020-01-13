@@ -37,9 +37,9 @@ int main() {
 	fclose(logementsDon);
 	fclose(demandesDon);
 
-	insererEtudiant(etudiants, &nbEtudiants);
+//	insererEtudiant(etudiants, &nbEtudiants);
 
-	//choixMenuPrincipal(etudiants, &nbEtudiants, logements, demandes);
+	choixMenuPrincipal(etudiants, &nbEtudiants, logements, demandes);
 
 
 
@@ -54,6 +54,11 @@ int main() {
 	}
 
 	sauvegardeDemandes(demandes, demandesDon);
+	sauvegardeLogements(logements, logementsDon);
+
+
+	fwrite(&nbEtudiants, sizeof(int), 1, etudiantsDon);
+	fwrite(etudiants, sizeof(Etudiant), nbEtudiants, etudiantsDon);
 
 	fclose(etudiantsDon);
 	fclose(logementsDon);
