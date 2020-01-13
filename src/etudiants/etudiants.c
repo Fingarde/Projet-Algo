@@ -52,13 +52,12 @@ void afficherEtudiant(Etudiant etud) {
     printf(UNDERLINE_YELLOW BOLD_YELLOW "Etudiant N°%d\n" RESET, etud.idEtudiant);
 
 	printf(BOLD_BLUE "%s %s\n" RESET, etud.nom, etud.prenom);
-	printf(BOLD_CYAN "Civilité: %s%s\n" RESET, etud.civilite == 0 ? BOLD_CYAN : BOLD_MAGENTA, getCivilite(etud.civilite));
+	printf(BOLD_WHITE "Civilité: %s%s\n" RESET, etud.civilite == 0 ? BOLD_CYAN : BOLD_MAGENTA, getCivilite(etud.civilite));
 
-	if(etud.handicape) printf(BOLD_RED "Est handicapé\n" RESET);
-	else printf(BOLD_GREEN "N'est pas handicapé\n" RESET);
-	
-	if(etud.boursie) printf(BOLD_GREEN "Echelon de bourse: %s\n" RESET, getEchelon(etud.echelon));
-	else printf(BOLD_RED "N'est pas boursier\n" RESET);
+    printf(BOLD_WHITE "Handicapé: %s%s\n", etud.handicape ? GREEN : RED, getBoolean(etud.handicape));
+ 
+    printf(BOLD_WHITE "Boursié: %s%s\n", etud.boursie ? GREEN : RED, getBoolean(etud.boursie));
+	if(etud.boursie) printf(BOLD_WHITE "Echelon de bourse: " BOLD_YELLOW "%s\n" RESET, getEchelon(etud.echelon));
 }
 
 MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
@@ -68,8 +67,24 @@ MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
     return getLogement(logements->suivant, etud);
 }
 
-int rechercheEtudiant(Etudiant etudiants[], int idEtudiant, int* position) {
-    // recherche dichotomique
+int rechercheEtudiant (Etudiant etudiants[], int idEtudiant, int nbEtudiants) {
+    int deb = 0, m, fin = nbEtudiants - 1;
+
+    while (deb <= fin) {
+        m = (fin - deb) / 2;
+
+        if (idEtudiant == etudiants[m].idEtudiant) {
+            return 0;
+        }
+        else if (idEtudiant < etudiants[m].idEtudiant) {
+            fin = m - 1;
+        }
+        else if (idEtudiant > etudiants[m].idEtudiant) {
+            deb = m + 1;
+        }
+    }
+
+    return -1;
 }
 
 void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
@@ -78,10 +93,10 @@ void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
 
     printf(BOLD_GREEN "ID de l'étudiant: " BOLD_CYAN);
     scanf("%d", &(etudiant.idEtudiant));
-    /*if(rechercheEtudiant(etudiants, etudiant.idEtudiant, &position) != -1) {
+    if (rechercheEtudiant(etudiants, etudiant.idEtudiant, *nbEtudiants) == 0) {
         printf(BOLD_RED "L'etudiant existe déja");
         return;
-    }*/
+    }
 
     printf(BOLD_GREEN "Civilite: " BOLD_CYAN);
     scanf("%d", &(etudiant.civilite));
@@ -106,8 +121,10 @@ void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
     printf(BOLD_GREEN "Boursier: " BOLD_CYAN);
     scanf("%d", &(etudiant.boursie));
 
-    printf(BOLD_GREEN "Echelon: " BOLD_CYAN);
-    scanf("%d", &(etudiant.echelon));
+    if(etudiant.boursie) {
+        printf(BOLD_GREEN "Echelon: " BOLD_CYAN);
+        scanf("%d", &(etudiant.echelon));
+    }
 
     printf(BOLD_GREEN "Handicape: " BOLD_CYAN);
     scanf("%d", &(etudiant.handicape));

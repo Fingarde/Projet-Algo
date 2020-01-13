@@ -26,6 +26,7 @@ void afficherMenuPrincipal() {
 
 void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements listeLogements, ListeDemandes listeDemandes) {
 	int valMenu;
+	char choix;
 
 	afficherMenuPrincipal();
 
@@ -43,6 +44,25 @@ void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements 
 			case 3:
 				afficherDemandesEnAttentes(listeDemandes); 
 				break;
+			case 4 :
+				printf("Voulez vous entrez un nouvel étudiant (o/n) : ");
+				scanf("%c%*c", choix);				
+				while (choix != 'o' || choix != 'n') {
+					printf("Voulez vous entrez un nouvel étudiant (o/n) : ");
+					scanf("%c%*c", choix);	
+				}
+
+				if (choix == 'o') {
+					insererEtudiant(etudiants, nbEtudiants);
+				}
+
+				break;
+			// case 5 :
+
+			// 	break;
+			// case 6 : 
+
+			// 	break;
 			case 7:
 				departEtudiant(listeLogements, etudiants,  nbEtudiants); 
 				break;	
