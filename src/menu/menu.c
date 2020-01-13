@@ -19,10 +19,12 @@ void afficherMenuPrincipal() {
 	printf(BOLD_YELLOW "5» " BOLD_WHITE "Annuler une demande de logements\n");
 	printf(BOLD_YELLOW "6» " BOLD_WHITE "Libérer un logement\n");
 	printf("\n");
+	printf(BOLD_YELLOW "7» " BOLD_WHITE "Supprimer un étudiant\n");
+	printf("\n");
 	printf(BOLD_YELLOW "9» " BOLD_WHITE "Quitter le programme\n");
 }
 
-void choixMenuPrincipal(Etudiant etudiants[], int nbEtudiants , ListeLogements listeLogements, ListeDemandes listeDemandes) {
+void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements listeLogements, ListeDemandes listeDemandes) {
 	int valMenu;
 
 	afficherMenuPrincipal();
@@ -38,9 +40,12 @@ void choixMenuPrincipal(Etudiant etudiants[], int nbEtudiants , ListeLogements l
 			case 2:
 				afficherListeLogementsOccupe(listeLogements);
 				break;
-			case 3 :
+			case 3:
 				afficherDemandesEnAttentes(listeDemandes); 
 				break;
+			case 7:
+				departEtudiant(listeLogements, etudiants,  nbEtudiants); 
+				break;	
 			default:
 				choixMenuPrincipal(etudiants, nbEtudiants, listeLogements, listeDemandes);
 				break;
@@ -76,9 +81,19 @@ void afficherListeLogementsOccupe(ListeLogements listeLogements) {
 	}
 }
 
-void afficherDemandesEnAttentes (ListeDemandes listeDemandes) {
+void afficherDemandesEnAttentes(ListeDemandes listeDemandes) {
 	if(listeDemandes == NULL) return;
 
   	afficherDemande(listeDemandes->demande);
   	afficherDemandesEnAttentes (listeDemandes->suivant);
+}
+
+void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants) {
+	int idEtudiant;
+	
+	printf(BOLD_GREEN "ID de l'étudiant a supprimer: " BOLD_CYAN);
+	scanf("%d", &idEtudiant);
+
+
+	//supprimerEtudiant(logements, etudiants, *nbEtudiants, idEtudiant);
 }

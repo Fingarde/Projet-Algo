@@ -6,6 +6,7 @@
 
 #include "../enum/enum.h"
 
+#include "../logements/logements.h"
 /* Structure */
 
 // Étudiant
@@ -22,6 +23,8 @@ typedef struct {
 /* Prototypes */
 Etudiant lireEtudiant(FILE* flot);
 void afficherEtudiant(Etudiant etud);
-MaillonLogement* getLogement(ListeLogements logements, Etudiant etud)
+MaillonLogement* getLogement(ListeLogements logements, Etudiant etud);
+void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int idEtudiant);
+void insererEtudiant(Etudiant etudiants[], int* nbEtudiants);
 
 #endif

@@ -123,5 +123,5 @@ void sauvegardeLogements(ListeLogements logements, FILE* fe) {
     fprintf(fe, "%d", logements->logement.adapteHandicap);
     fprintf(fe, "%d", logements->logement.idEtudiant);
 
-    sauvegardeDemandes(logements->suivant, fe);
+    sauvegardeLogements(logements->suivant, fe);
 }

@@ -61,13 +61,49 @@ void afficherEtudiant(Etudiant etud) {
 	else printf(BOLD_RED "N'est pas boursier\n" RESET);
 }
 
-/*int supprimerEtudiant(ListeLogements logements, ) {
-
-}*/
-
 MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
     if(logements == NULL) return NULL;
 
     if(logements->logement.idEtudiant == etud.idEtudiant) return logements;
     return getLogement(logements->suivant, etud);
 }
+
+int rechercheEtudiant(Etudiant etudiants[], int idEtudiant, int* position) {
+    // recherche dichotomique
+}
+
+void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
+    Etudiant etudiant;
+    int position;
+
+    printf(BOLD_GREEN "ID de l'étudiant: " BOLD_CYAN);
+    scanf("%d", &(etudiant.idEtudiant));
+    if(rechercheEtudiant(etudiants, etudiant.idEtudiant, &position) != -1) {
+        printf(BOLD_RED "L'etudiant existe déja");
+        return;
+    }
+
+
+    // Faire tout les scanf
+
+
+    printf("%d", etudiant.idEtudiant);
+    //(*nbEtudiants)++;
+}
+
+void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int positionEtudiant) {
+    MaillonLogement* logement;
+    int index;
+
+    logement = getLogement(logements, etudiants[positionEtudiant]);
+    if(logement != NULL) {
+        logement->logement.disponible = 1;
+    }
+
+    for(index = positionEtudiant; index < (*nbEtudiants) - 1; index++) {
+        etudiants[index] = etudiants[index + 1];
+    }
+
+    (*nbEtudiants)--;
+}
+

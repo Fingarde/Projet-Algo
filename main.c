@@ -30,14 +30,17 @@ int main() {
 	logements = chargementLogements(logementsDon);
 	demandes = chargementDemandes(demandesDon);
 
-	choixMenuPrincipal(etudiants, nbEtudiants, logements, demandes);
-
 	fread(&nbEtudiants, sizeof(int), 1, etudiantsDon);
 	fread(etudiants, sizeof(Etudiant), nbEtudiants, etudiantsDon); 
 
 	fclose(etudiantsDon);
 	fclose(logementsDon);
 	fclose(demandesDon);
+
+	insererEtudiant(etudiants, &nbEtudiants);
+
+	//choixMenuPrincipal(etudiants, &nbEtudiants, logements, demandes);
+
 
 
 
