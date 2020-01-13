@@ -74,21 +74,47 @@ int rechercheEtudiant(Etudiant etudiants[], int idEtudiant, int* position) {
 
 void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
     Etudiant etudiant;
-    int position;
+    int position, tailleNom, taillePrenom;
 
     printf(BOLD_GREEN "ID de l'étudiant: " BOLD_CYAN);
     scanf("%d", &(etudiant.idEtudiant));
-    if(rechercheEtudiant(etudiants, etudiant.idEtudiant, &position) != -1) {
+    /*if(rechercheEtudiant(etudiants, etudiant.idEtudiant, &position) != -1) {
         printf(BOLD_RED "L'etudiant existe déja");
         return;
+    }*/
+
+    printf(BOLD_GREEN "Civilite: " BOLD_CYAN);
+    scanf("%d", &(etudiant.civilite));
+
+    printf(BOLD_GREEN "Nom de l'etudiant: " BOLD_CYAN);
+    scanf("%s", etudiant.nom);
+    tailleNom = strlen(etudiant.nom);
+    if(etudiant.nom[tailleNom - 1] == '\n') {
+        etudiant.nom[tailleNom - 1] = '\0';
+        tailleNom--;
     }
 
+    printf(BOLD_GREEN "Prenom de l'etudiant: " BOLD_CYAN);
+    scanf("%s", etudiant.prenom);
+    taillePrenom = strlen(etudiant.prenom);
+    if(etudiant.prenom[taillePrenom - 1] == '\n') {
+        etudiant.prenom[taillePrenom - 1] = '\0';
+        taillePrenom--;
+    }
 
-    // Faire tout les scanf
+    
+    printf(BOLD_GREEN "Boursier: " BOLD_CYAN);
+    scanf("%d", &(etudiant.boursie));
 
+    printf(BOLD_GREEN "Echelon: " BOLD_CYAN);
+    scanf("%d", &(etudiant.echelon));
 
-    printf("%d", etudiant.idEtudiant);
-    //(*nbEtudiants)++;
+    printf(BOLD_GREEN "Handicape: " BOLD_CYAN);
+    scanf("%d", &(etudiant.handicape));
+    
+    
+    etudiants[*nbEtudiants] = etudiant;
+    (*nbEtudiants)++;
 }
 
 void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int positionEtudiant) {
