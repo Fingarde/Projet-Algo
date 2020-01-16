@@ -37,9 +37,7 @@ int main() {
 	fclose(logementsDon);
 	fclose(demandesDon);
 
-	afficherEtudiant(etudiants[nbEtudiants - 1]);
 	choixMenuPrincipal(etudiants, &nbEtudiants, logements, demandes);
-
 
 	//					SAUVEGARDE			
 	etudiantsDon = fopen("fichiers/etudiants.don", "wb");
