@@ -53,6 +53,10 @@ Logement lireLogement(FILE* flot) {
     return loge;
 }
 
+ListeLogements initListeLogements() {
+    return NULL;
+}
+
 ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement logement) {
 	MaillonLogement* tmp;
 
@@ -95,53 +99,49 @@ ListeLogements chargementLogements(FILE* fe) {
 	return logements;
 }
 
+ListeLogements insererEnTeteLogements(ListeLogements liste, Logement loge) {
+    MaillonLogement* tmp;
 
-// Insertion en tête
-ListeLogements inserTete (ListeLogements l, char *nomVille){
-    MaillonLogement * tmp;
-
-    tmp = (MaillonLogement*)malloc(sizeof(MaillonLogement));
+    tmp = (MaillonLogement*) malloc(sizeof(MaillonLogement));
     if (tmp == NULL) {
         printf("Problème allocation\n");
         exit(1);
     }
-    
-    strcpy(tmp->nomCite, nomVille);
 
-    tmp->suivant = listeLogements;
-    listeLogements = tmp;
+    tmp->logement = loge;
 
-    return listeLogements;
+    tmp->suivant = liste;
+    liste = tmp;
+
+    return liste;
 }
 
-//Tri de la liste par noms ville
-ListeLogements trierParNomCite(ListeLogements listeLogements, char *nomVille) {
-   if (listeLogements == NULL) {
-        listeLogements = inserTete(listeLogements, nomVille);
+ListeLogements insererTrieLogements(ListeLogements liste, Logement loge) {
+   if(liste == NULL) {
+       liste = insererEnTeteLogements(liste, loge);
    }
-   else if (strcmp(nomVille, listeLogements->nomCite) < 0) {
-       listeLogements = inserTete(listeLogements, nomVille);
+   else if(strcmp(liste->logement.nomCite, loge.nomCite) > 0) {
+       liste = insererEnTeteLogements(liste, loge);
    }
    else {
-    listeLogements->suivant = trierParNomCite(listeLogements->suivant, nomVille);
+       liste->suivant = insererTrieLogements(liste->suivant, loge);
    }
 
-   return listeLogements;
+   return liste;
 }
 
-// Ajouter
-Logement triListe (Logement loge){
-    MaillonLogement * tmp = loge;
-    Logement new;
+ListeLogements trierLogements (ListeLogements liste) {
+    ListeLogements res, tmp = liste;
+    
 
-    res = initListe();
+    res = initListeLogements();
 
     while (tmp != NULL){
-        new = trierParNomCite(res, tmp->nom);
+        res = insererTrieLogements(res, tmp->logement);
         tmp = tmp->suivant;
     }
 
-    return new;
+    return res;
 }
 
 void afficherLogement(Logement loge) {
@@ -155,7 +155,7 @@ void afficherLogement(Logement loge) {
 
     printf(BOLD_WHITE "Adapté handicapé: %s%s\n", loge.adapteHandicap ? GREEN : RED, getBoolean(loge.adapteHandicap));
 
-    if(!loge.disponible) printf(BOLD_WHITE  "Occupé par %d\n", loge.idEtudiant);
+    if(!loge.disponible) printf(BOLD_WHITE  "Occupé par l'étudiant N°%d\n", loge.idEtudiant);
 }
 
 void sauvegardeLogements(ListeLogements logements, FILE* fe) {

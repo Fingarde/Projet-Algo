@@ -33,8 +33,8 @@ ListeLogements chargementLogements(FILE* fe);
 void afficherLogement(Logement loge);
 ListeLogements trierParNomCite(ListeLogements listeLogements);
 void sauvegardeLogements(ListeLogements logements, FILE* fe);
-ListeLogements inserTete (ListeLogements l, char *nomVille);
-ListeLogements trierParNomCite(ListeLogements listeLogements, char *nomVille);
-Logement triListe (Logement loge);
+ListeLogements insererEnTeteLogements(ListeLogements liste, Logement loge);
+ListeLogements insererTrieLogements(ListeLogements liste, Logement loge);
+ListeLogements trierLogements (ListeLogements liste);
 
 #endif

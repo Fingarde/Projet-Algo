@@ -11,5 +11,6 @@ void afficherListeLogementsDispo(ListeLogements listeLogements);
 void afficherListeLogementsOccupe(ListeLogements listeLogements);
 void afficherDemandesEnAttentes (ListeDemandes listeDemandes);
 void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants);
+void ajouterDemandeEnAttentes(ListeDemandes listeDemandes);
 
 #endif

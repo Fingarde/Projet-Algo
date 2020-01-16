@@ -67,7 +67,7 @@ MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
     return getLogement(logements->suivant, etud);
 }
 
-int rechercheEtudiant (Etudiant etudiants[], int idEtudiant, int nbEtudiants) {
+int rechercheEtudiant (Etudiant etudiants[], int idEtudiant, int nbEtudiants) { // TODO TOUJOURS BOUCLE INFINIE WTF
     int deb = 0, m, fin = nbEtudiants - 1;
 
     while (deb <= fin) {
@@ -92,9 +92,9 @@ void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
     int position, tailleNom, taillePrenom;
 
     printf(BOLD_GREEN "ID de l'étudiant: " BOLD_CYAN);
-    scanf("%d", &(etudiant.idEtudiant));
+    scanf("%d", &(etudiant.idEtudiant)); 
     if (rechercheEtudiant(etudiants, etudiant.idEtudiant, *nbEtudiants) == 0) {
-        printf(BOLD_RED "L'etudiant existe déja");
+        printf(BOLD_RED "L'etudiant existe déja\n");
         return;
     }
 
@@ -117,7 +117,6 @@ void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
         taillePrenom--;
     }
 
-    
     printf(BOLD_GREEN "Boursier: " BOLD_CYAN);
     scanf("%d", &(etudiant.boursie));
 

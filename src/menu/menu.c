@@ -25,6 +25,7 @@ void afficherMenuPrincipal() {
 }
 
 void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements listeLogements, ListeDemandes listeDemandes) {
+	Demande demande;
 	int valMenu;
 	char choix;
 
@@ -45,17 +46,13 @@ void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements 
 				afficherDemandesEnAttentes(listeDemandes); 
 				break;
 			case 4 :
-				printf("Voulez vous entrez un nouvel étudiant (o/n) : ");
-				scanf("%c%*c", &choix);				
-				while (choix != 'o' || choix != 'n') {
-					printf("Voulez vous entrez un nouvel étudiant (o/n) : ");
-					scanf("%c%*c", &choix);	
-				}
-
-				if (choix == 'o') {
+				choix = 'o';
+				while (choix == 'o') {
 					insererEtudiant(etudiants, nbEtudiants);
-					insererDemande(demandes);
+					ajouterDemandeEnAttentes(listeDemandes);
 
+					printf(BOLD_YELLOW "Voulez vous entrez une nouvelle demande (o/n) : ");
+					scanf("%c%*c", &choix);	
 				}
 				break;
 			// case 5 :
@@ -82,11 +79,13 @@ void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements 
 void afficherListeLogementsDispo(ListeLogements listeLogements) {
 	ListeLogements logeTmp = listeLogements;
 
+	logeTmp = trierLogements(logeTmp);
 	while(logeTmp != NULL) {
 		if(logeTmp->logement.disponible) { // == 0
 			afficherLogement(logeTmp->logement); // Libre
+			printf("\n");
 		}
-		printf("\n");
+	
 		logeTmp = logeTmp->suivant;
 	}
 }
@@ -94,11 +93,13 @@ void afficherListeLogementsDispo(ListeLogements listeLogements) {
 void afficherListeLogementsOccupe(ListeLogements listeLogements) {
 	ListeLogements logeTmp = listeLogements;
 
+	logeTmp = trierLogements(logeTmp);
 	while(logeTmp != NULL) {
 		if(!logeTmp->logement.disponible) { // == 1
 			afficherLogement(logeTmp->logement); // Occupé
+			printf("\n");
 		}
-		printf("\n");
+		
 		logeTmp = logeTmp->suivant;
 	}
 }
@@ -120,11 +121,18 @@ void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudi
 	//supprimerEtudiant(logements, etudiants, *nbEtudiants, idEtudiant);
 }
 
-void traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements, listeLogements) {
+void ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
+	ListeDemandes mDemande;
+
+	mDemande = ajouterDemande(listeDemandes);
+
+	listeDemandes = insererTrieDemandes();
+}
+
+/*void traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements listeLogements) {
 	if (listeDemandes[i]->disponible == 1) {
 		if (listeDemandes[i]->)
 		{
-			/* code */
 		}
 	}
-}
+}*/

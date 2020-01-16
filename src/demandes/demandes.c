@@ -74,8 +74,12 @@ ListeDemandes ajouterDemandeListe(ListeDemandes listeDemandes, Demande demande) 
 	return tmp;
 }
 
+ListeDemandes initListeDemandes() {
+    return NULL;
+}
+
 ListeDemandes chargementDemandes(FILE* fe) {
-	ListeDemandes demandes = NULL;
+	ListeDemandes demandes = initListeDemandes();
 	Demande dema;
 	
 	dema = lireDemande(fe);
@@ -114,29 +118,90 @@ void sauvegardeDemandes(ListeDemandes demandes, FILE* fe) {
     fprintf(fe, "%d", demandes->demande.typeLogement);
 }
 
-void insererDemande (Demande demande) {
-	int tailleCite, tailleNomCite;
+MaillonDemande* rechercheListe (ListeDemandes listeDemandes, int idDemande) {
+	MaillonDemande* tmp = listeDemandes;
+
+	if (listeDemandes == NULL) { 
+		return NULL; 
+	}          
+
+	if (tmp->demande.idDemande == idDemande) {
+		return listeDemandes;
+	}
+
+	tmp = rechercheListe(listeDemandes->suivant, idDemande);
+
+	return tmp;
+}
+
+ListeDemandes ajouterDemande (ListeDemandes listeDemandes) {
+	MaillonDemande* tmp;
+
+	int tailleCite;
+
+	tmp = (MaillonDemande*) malloc(sizeof(MaillonDemande));
+	if(tmp == NULL) {
+			printf("Problème mémoire");
+			exit(1);
+	}
 
 	printf(BOLD_GREEN "ID Demande : " RESET);
-	scanf("%d", &(demande.idDemande));
+
+	scanf("%d%*c", &tmp->demande.idDemande);
+
+	if (rechercheListe(listeDemandes, tmp->demande.idDemande) != NULL) {
+		printf(BOLD_RED "La demande existe déja\n");
+        return listeDemandes;
+	}
 
 	printf(BOLD_GREEN "ID Étudiant : " RESET);
-	scanf("%d", &(demande.idEtudiant));
+	scanf("%d%*c", &tmp->demande.idEtudiant);
 
 	printf(BOLD_GREEN "Échelon de bourse : " RESET);
-	scanf("%d", &(demande.echelon));
+	scanf("%d%*c", &tmp->demande.echelon);
 
 	printf(BOLD_GREEN "Nom de la cité : " RESET);
-	fgets(demande.nomCite, 65, stdin);
-	tailleCite = strlen(demande.nomCite);
-	if (demande.nomCite[tailleCite] == '\n') {
-		demande.nomCite[tailleCite] = '\0';
+	fgets(tmp->demande.nomCite, 65, stdin);
+
+	tailleCite = strlen(tmp->demande.nomCite);
+	if (tmp->demande.nomCite[tailleCite] == '\n') {
+		tmp->demande.nomCite[tailleCite] = '\0';
 	}
 
 	printf(BOLD_GREEN "Type de logement : "RESET);
-	fgets(demande.typeLogement.typeLogement, 65, stdin);
-	tailleNomCite = strlen(demande.typeLogement);
-	if (demande.typeLogement[tailleNomCite] == '\n') {
-		demande.typeLogement[tailleNomCite] = '\0';
-	}
+	scanf("%d%*c", &tmp->demande.typeLogement);
+
+	return tmp;
+}
+
+
+ListeDemandes insererEnTeteDemande(ListeDemandes liste, Demande dema) {
+    MaillonDemande* tmp;
+
+    tmp = (MaillonDemande*) malloc(sizeof(MaillonDemande));
+    if (tmp == NULL) {
+        printf("Problème allocation\n");
+        exit(1);
+    }
+
+    tmp->demande = dema;
+
+    tmp->suivant = liste;
+    liste = tmp;
+
+    return liste;
+}
+
+ListeDemandes insererTrieDemandes(ListeDemandes liste, Demande dema) {
+   if(liste == NULL) {
+       liste = insererEnTeteDemande(liste, dema);
+   }
+   else if(liste->demande.echelon , dema.echelon) {
+       liste = insererEnTeteDemande(liste, dema);
+   }
+   else {
+       liste->suivant = insererTrieDemandes(liste->suivant, dema);
+   }
+
+   return liste;
 }
