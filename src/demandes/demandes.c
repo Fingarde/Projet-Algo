@@ -59,6 +59,10 @@ ListeDemandes ajouterDemandeListe(ListeDemandes listeDemandes, Demande demande) 
 
 	tailleCite = strlen(demande.nomCite);
 	tmp->demande.nomCite = (char*) malloc(sizeof(char) * tailleCite + 1);
+	if (tmp->demande.nomCite == NULL) {
+		printf("Problème d'allocation mèmoire\n");
+		exit(1);
+	}
 	strcpy(tmp->demande.nomCite, demande.nomCite);
 
 	tmp->demande.typeLogement = demande.typeLogement;
@@ -110,25 +114,29 @@ void sauvegardeDemandes(ListeDemandes demandes, FILE* fe) {
     fprintf(fe, "%d", demandes->demande.typeLogement);
 }
 
-void insererDemande (ListeDemandes ListeDemandes) {
-	MaillonDemande* tmp;
-
-	int tailleCite;
-
-	tmp = (MaillonDemande*) malloc(sizeof(MaillonDemande));
-	if (tmp == NULL) {
-			printf("Problème mémoire");
-			exit(1);
-	}
+void insererDemande (Demande demande) {
+	int tailleCite, tailleNomCite;
 
 	printf(BOLD_GREEN "ID Demande : " RESET);
-	scanf("%d", tmp->demande.idDemande);
+	scanf("%d", &(demande.idDemande));
 
 	printf(BOLD_GREEN "ID Étudiant : " RESET);
-	scanf("%d", tmp->demande.idEtudiant);
+	scanf("%d", &(demande.idEtudiant));
 
 	printf(BOLD_GREEN "Échelon de bourse : " RESET);
-	scanf("%d", tmp->demande.echelon);
+	scanf("%d", &(demande.echelon));
 
 	printf(BOLD_GREEN "Nom de la cité : " RESET);
+	fgets(demande.nomCite, 65, stdin);
+	tailleCite = strlen(demande.nomCite);
+	if (demande.nomCite[tailleCite] == '\n') {
+		demande.nomCite[tailleCite] = '\0';
+	}
+
+	printf(BOLD_GREEN "Type de logement : "RESET);
+	fgets(demande.typeLogement.typeLogement, 65, stdin);
+	tailleNomCite = strlen(demande.typeLogement);
+	if (demande.typeLogement[tailleNomCite] == '\n') {
+		demande.typeLogement[tailleNomCite] = '\0';
+	}
 }
