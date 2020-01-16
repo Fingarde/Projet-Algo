@@ -54,6 +54,7 @@ void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements 
 
 				if (choix == 'o') {
 					insererEtudiant(etudiants, nbEtudiants);
+					insererDemande(demandes);
 
 				}
 				break;
