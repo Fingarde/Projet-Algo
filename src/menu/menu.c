@@ -46,15 +46,15 @@ void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements 
 				break;
 			case 4 :
 				printf("Voulez vous entrez un nouvel étudiant (o/n) : ");
-				scanf("%c%*c", choix);				
+				scanf("%c%*c", &choix);				
 				while (choix != 'o' || choix != 'n') {
 					printf("Voulez vous entrez un nouvel étudiant (o/n) : ");
-					scanf("%c%*c", choix);	
+					scanf("%c%*c", &choix);	
 				}
 
 				if (choix == 'o') {
 					insererEtudiant(etudiants, nbEtudiants);
-					
+
 				}
 				break;
 			// case 5 :
@@ -80,6 +80,7 @@ void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements 
 
 void afficherListeLogementsDispo(ListeLogements listeLogements) {
 	ListeLogements logeTmp = listeLogements;
+
 	while(logeTmp != NULL) {
 		if(logeTmp->logement.disponible) { // == 0
 			afficherLogement(logeTmp->logement); // Libre
