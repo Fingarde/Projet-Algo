@@ -109,3 +109,26 @@ void sauvegardeDemandes(ListeDemandes demandes, FILE* fe) {
     fprintf(fe, "%s\n", demandes->demande.nomCite);
     fprintf(fe, "%d", demandes->demande.typeLogement);
 }
+
+void insererDemande (ListeDemandes ListeDemandes) {
+	MaillonDemande* tmp;
+
+	int tailleCite;
+
+	tmp = (MaillonDemande*) malloc(sizeof(MaillonDemande));
+	if (tmp == NULL) {
+			printf("Problème mémoire");
+			exit(1);
+	}
+
+	printf(BOLD_GREEN "ID Demande : " RESET);
+	scanf("%d", tmp->demande.idDemande);
+
+	printf(BOLD_GREEN "ID Étudiant : " RESET);
+	scanf("%d", tmp->demande.idEtudiant);
+
+	printf(BOLD_GREEN "Échelon de bourse : " RESET);
+	scanf("%d", tmp->demande.echelon);
+
+	printf(BOLD_GREEN "Nom de la cité : " RESET);
+}
