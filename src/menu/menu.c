@@ -119,3 +119,12 @@ void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudi
 
 	//supprimerEtudiant(logements, etudiants, *nbEtudiants, idEtudiant);
 }
+
+void traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements, listeLogements) {
+	if (listeDemandes[i]->disponible == 1) {
+		if (listeDemandes[i]->)
+		{
+			/* code */
+		}
+	}
+}
