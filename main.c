@@ -37,8 +37,6 @@ int main() {
 	fclose(logementsDon);
 	fclose(demandesDon);
 
-	insererEtudiant(etudiants, &nbEtudiants);
-
 	afficherEtudiant(etudiants[nbEtudiants - 1]);
 	choixMenuPrincipal(etudiants, &nbEtudiants, logements, demandes);
 
