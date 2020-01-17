@@ -6,7 +6,7 @@
 
 #include "../enum/enum.h"
 
-// Logement
+// Structure d'un logement
 typedef struct {
     int idLogement;
     char* nomCite;

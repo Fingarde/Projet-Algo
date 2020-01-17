@@ -10,6 +10,17 @@
 
 #include "../logements/logements.h"
 
+/*  Fonction : lireEtudiant
+    Finalité : lire un étudiant dans un flot 
+    Paramètres : flot - flot de lecture des données
+    Variables : etud - structure d'étudiant
+                nom - nom d'un étudiant
+                tailleNom - taille du nom de l'étudiant
+                prenom - prénom d'un étudiant
+                taillePrenom - taille du prénom de l'étudiant
+    Valeur retournée : etud - structure d'étudiant
+*/
+
 Etudiant lireEtudiant(FILE* flot) {
     Etudiant etud;
 
@@ -48,6 +59,11 @@ Etudiant lireEtudiant(FILE* flot) {
     return etud;
 }
 
+/*  Fonction : afficherEtudiant
+    Finalité : afficher tout les étudiants dans le tableau
+    Paramètres : etud - structure d'étudiant
+*/
+
 void afficherEtudiant(Etudiant etud) {
     printf(UNDERLINE_YELLOW BOLD_YELLOW "Etudiant N°%d\n" RESET, etud.idEtudiant);
 
@@ -60,12 +76,27 @@ void afficherEtudiant(Etudiant etud) {
 	if(etud.boursie) printf(BOLD_WHITE "Echelon de bourse: " BOLD_YELLOW "%s\n" RESET, getEchelon(etud.echelon));
 }
 
+/*
+JSP
+*/
+
 MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
     if(logements == NULL) return NULL;
 
     if(logements->logement.idEtudiant == etud.idEtudiant) return logements;
     return getLogement(logements->suivant, etud);
 }
+
+/*  Fonction : rechercheEtudiant
+    Finalité : rechercher la position d'un étudiant dans le tableau
+    Paramètres : etudiants[] - tableau d'étudiants
+                idEtudiant - ID d'un étudiant
+                nbEtudiants - nombre d'étudiants dans le tableau
+    Variables : deb - valeur du début de l'intervalle de recherche
+                m - valeur de la position dans la recherche (entre l'intervalle deb et fin)
+                fin - valeur de la fin de l'intervalle de recherche
+    Valeur retournée : m ou deb - position de l'étudiant dans le tableau
+*/
 
 int rechercheEtudiant (Etudiant etudiants[], int idEtudiant, int nbEtudiants) { // TODO TOUJOURS BOUCLE INFINIE WTF
     int deb = 0, m, fin = nbEtudiants - 1;      // SI IL EST D=PRESETN ON BOUCLE
@@ -74,18 +105,28 @@ int rechercheEtudiant (Etudiant etudiants[], int idEtudiant, int nbEtudiants) { 
         m = (fin - deb) / 2;
 
         if (idEtudiant == etudiants[m].idEtudiant) {
-            return 0;
+            return m;
         }
         else if (idEtudiant < etudiants[m].idEtudiant) {
             fin = m - 1;
         }
-        else if (idEtudiant > etudiants[m].idEtudiant) {
+        else {
             deb = m + 1;
         }
     }
 
-    return -1;
+    return deb;
 }
+
+/*  Fonction : insererEtudiant
+    Finalité : inserer un étudiant dans le tableau par la saisie 
+    Paramètres : etudiants[] - tableau d'étudiants
+                 *nbEtudiants - nombre d'étudiants dans le tableau
+    Variables : etudiant - structure d'un étudiant
+                position - position d'insertion d'un étudiant
+                tailleNom - taille du nom de l'étudiant
+                taillePrenom - taille du prénom de l'étudiant
+*/
 
 void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
     Etudiant etudiant;
@@ -133,6 +174,27 @@ void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
     (*nbEtudiants)++;
 }
 
+/* 
+   	Fonction: supprimerEtudiant
+   	Finalité: Fonction globale du programme
+    Variables : 
+        - etudiantsDon 		flot d'entrée du fichier etudiants.don
+		- logementsDon		flot d'entrée du fichier logements.don
+		- demandesDon		flot d'entrée du fichier demandes.don
+
+		- etudiants			tableau d'étudiants
+		- nbEtudiants		nombre d'étudiants dans le tableau
+
+		- logements			liste chainée des logements
+		- demandes			liste chainée des demandes
+
+		- valMenu			choix retenu pour le menu
+		- choix				choix retenu pour continuer la saisie d'ube demande
+
+
+    Valeur retournée : 
+        Le code de retour de l'application
+*/
 void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int idEtudiant) {
     MaillonLogement* logement;
     int index, pos;

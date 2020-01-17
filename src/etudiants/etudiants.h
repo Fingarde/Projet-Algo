@@ -7,9 +7,10 @@
 #include "../enum/enum.h"
 
 #include "../logements/logements.h"
+
 /* Structure */
 
-// Étudiant
+// Structure d'étudiant
 typedef struct {
     int idEtudiant;
     Civilite civilite;

@@ -9,6 +9,11 @@
 #include "../logements/logements.h"
 #include "../demandes/demandes.h"
 
+
+/* 
+   	Fonction: afficherMenuPrincipal
+   	Finalité: Affiche le menu principale
+*/
 void afficherMenuPrincipal() {
 	printf(BOLD_RED "▬▬  " BOLD_YELLOW "Bienvenue sur le programme de demandes de logement du CROUS" BOLD_RED "  ▬▬\n");
 	printf("\n");
@@ -25,6 +30,12 @@ void afficherMenuPrincipal() {
 	printf(BOLD_YELLOW "9» " BOLD_WHITE "Quitter le programme\n");
 }
 
+/* 
+   	Fonction: afficherListeLogementsDispo
+	Paramètre entrant/sortant
+		- listeLogements		liste chainée des logements
+   	Finalité: Affiche les logements disponibles triés par nom de cité
+*/
 void afficherListeLogementsDispo(ListeLogements listeLogements) {
 	ListeLogements logeTmp = listeLogements;
 
@@ -39,6 +50,12 @@ void afficherListeLogementsDispo(ListeLogements listeLogements) {
 	}
 }
 
+/* 
+   	Fonction: afficherListeLogementsOccupe
+	Paramètre entrant/sortant
+		- listeLogements		liste chainée des logements
+   	Finalité: Affiche les logements disponibles triés par nom de cité
+*/
 void afficherListeLogementsOccupe(ListeLogements listeLogements) {
 	ListeLogements logeTmp = listeLogements;
 
@@ -53,6 +70,12 @@ void afficherListeLogementsOccupe(ListeLogements listeLogements) {
 	}
 }
 
+/* 
+   	Fonction: afficherDemandesEnAttentes
+	Paramètre entrant/sortant
+		- listeDemandes		liste chainée des demandes
+   	Finalité: Affiche les demandes en attentes
+*/
 void afficherDemandesEnAttentes(ListeDemandes listeDemandes) {
 	if(listeDemandes == NULL) return;
 
@@ -60,6 +83,19 @@ void afficherDemandesEnAttentes(ListeDemandes listeDemandes) {
   	afficherDemandesEnAttentes (listeDemandes->suivant);
 }
 
+/* 
+   	Fonction: departEtudiant
+   	Finalité: Supprime un etudiant, libère son logement si il en avait un et traite les demandes
+	Paramètre entrant/sortant
+		- logements			liste chainée des logements
+		- etudiants			tableau d'étudiants
+		- nbEtudiant		pointeur sur le nombre d'étudiant du tableau
+		- listeDemandes		liste chainée des demandes
+    Variables : 
+        - idEtudiant 		id de l'étudiant a supprimer
+    Valeur retournée : 
+        La nouvelle liste de demandes
+*/
 ListeDemandes departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, ListeDemandes listeDemandes) {
 	int idEtudiant;
 	
@@ -71,6 +107,16 @@ ListeDemandes departEtudiant(ListeLogements logements, Etudiant etudiants[], int
 	return traitementDemandesEnAttentes(listeDemandes, logements, etudiants, *nbEtudiants); 
 }
 
+/* 
+   	Fonction: ajouterDemandeEnAttentes
+   	Finalité: Saisi puis ajoute une nouvelle demande
+	Paramètre entrant/sortant
+		- listeDemandes		liste chainée des demandes
+    Variables : 
+        - demande 			la demande a ajouter
+    Valeur retournée : 
+        La nouvelle liste de demandes
+*/
 ListeDemandes ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
 	Demande demande;
 
@@ -84,6 +130,17 @@ ListeDemandes ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
 }
 
 
+
+/* 
+   	Fonction: supprimerDemandeEnAttentes
+   	Finalité: Saisi puis supprime une demande
+	Paramètre entrant/sortant
+		- listeDemandes		liste chainée des demandes
+    Variables: 
+        - idDemande 		l'id de la demande a supprimer
+    Valeur retournée : 
+        La nouvelle liste de demandes
+*/
 ListeDemandes supprimerDemandeEnAttentes(ListeDemandes listeDemandes) {
 	int idDemande;
 
@@ -94,6 +151,23 @@ ListeDemandes supprimerDemandeEnAttentes(ListeDemandes listeDemandes) {
 	return supprimerDemande(listeDemandes, idDemande);
 }
 
+/* 
+   	Fonction: traitementDemandesEnAttentes
+   	Finalité: Traite toutes les demande de la liste et retourne la liste des demandes qui n'ont pas pu être traitées
+    Paramètre entrant/sortant : 
+		- etudiants			tableau d'étudiants
+		
+
+		- listeLogements		liste chainée des logements
+		- listeDemandes			liste chainée des demandes
+	Paramètre:
+		- nbEtudiants			nombre d'étudiants dans le tableau
+	Variables: 
+		- tmp					copie de la liste des demandes	
+		- traite				si la demande a été traité passe a 1 et permet donc de supprimer cette demande
+    Valeur retournée : 
+        La nouvelle liste de demandes
+*/
 ListeDemandes traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements listeLogements, Etudiant etudiants[], int nbEtudiants) {
 	ListeDemandes tmp;
 	int traite;

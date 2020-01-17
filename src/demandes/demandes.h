@@ -9,7 +9,7 @@
 
 /* Structure */
 
-// Demande
+// Structure d'une demande
 typedef struct {
 	int idDemande;
 	int idEtudiant;
@@ -18,11 +18,13 @@ typedef struct {
 	TypeLogement typeLogement;
 } Demande;
 
+// Maillon d'une demande
 typedef struct MailleDema {
     Demande demande;
     struct MailleDema* suivant;
 } MaillonDemande;
 
+// Liste de demandes
 typedef MaillonDemande* ListeDemandes;
 
 /* Prototypes */

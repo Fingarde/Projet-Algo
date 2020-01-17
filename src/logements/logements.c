@@ -8,6 +8,12 @@
 #include "../enum/enum.h"
 #include "../color/color.h"
 
+/*  Fonction : lireLogement
+    Finalité : lire un logement sur un flot
+    Paramètres : flot - flot d'entrée des données 
+    Valeur retournée : loge - structure d'un logement
+*/
+
 Logement lireLogement(FILE* flot) {
     Logement loge;
     char nomCite[65];
@@ -53,9 +59,21 @@ Logement lireLogement(FILE* flot) {
     return loge;
 }
 
+/*  Fonction : initListeLogements
+    Finalité : initialise la liste
+    Valeur retournée : NULL - valeur du pointeur de liste
+*/
+
 ListeLogements initListeLogements() {
     return NULL;
 }
+
+/*  Fonction : ajouterLogementListe
+    Finalité : ajouter un logement dans la liste
+    Paramètres : listeLogements - liste contenant les logements
+				 logement - structure de logement 
+    Valeur retournée : tmp - adresse vers le maillon de la liste
+*/
 
 ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement logement) {
 	MaillonLogement* tmp;
@@ -84,6 +102,12 @@ ListeLogements ajouterLogementListe(ListeLogements listeLogements, Logement loge
 	return tmp;
 }
 
+/*  Fonction : chargementLogements
+    Finalité : charger les logements dans une liste 
+    Paramètres : fe - flot d'entrée des données 
+    Valeur retournée : loge - liste de demandes
+*/
+
 ListeLogements chargementLogements(FILE* fe) {
 	ListeLogements logements = NULL;
 	Logement loge;
@@ -99,6 +123,12 @@ ListeLogements chargementLogements(FILE* fe) {
 	return logements;
 }
 
+/*  Fonction : insererEnTeteLogements
+    Finalité : inserer un logement en tete de liste
+    Paramètres : liste - liste de logements
+				 loge - structure de logement
+    Valeur retournée : tmp - adresse vers le maillon de la liste
+*/
 ListeLogements insererEnTeteLogements(ListeLogements liste, Logement loge) {
     MaillonLogement* tmp;
 
@@ -116,6 +146,13 @@ ListeLogements insererEnTeteLogements(ListeLogements liste, Logement loge) {
     return liste;
 }
 
+/*  Fonction : insererTrieLogements
+    Finalité : inserer un logement au bon endroit dans la liste
+    Paramètres : liste - liste de logements
+				 loge - structure de logement
+    Valeur retournée : liste - liste de logements
+*/
+
 ListeLogements insererTrieLogements(ListeLogements liste, Logement loge) {
    if(liste == NULL) {
        liste = insererEnTeteLogements(liste, loge);
@@ -130,6 +167,17 @@ ListeLogements insererTrieLogements(ListeLogements liste, Logement loge) {
    return liste;
 }
 
+/* 
+   	Fonction: trierLogements
+   	Finalité: Trier les logements par nom de cité et retourne la nouvelle liste de logements
+    Variables : 
+        - res 		        liste chainée des logements
+		- tmp		        liste chainée des logements
+	Paramètre entrant/sortant:
+        - liste            liste chainée des logements
+    Valeur retournée : 
+        La nouvelle liste trié de logements
+*/
 ListeLogements trierLogements (ListeLogements liste) {
     ListeLogements res, tmp = liste;
     
@@ -144,6 +192,12 @@ ListeLogements trierLogements (ListeLogements liste) {
     return res;
 }
 
+/* 
+   	Fonction: afficherLogement
+   	Finalité: Affiche un logement
+	Paramètre:
+        - logement            le logement a afficher
+*/
 void afficherLogement(Logement loge) {
     printf(UNDERLINE_YELLOW BOLD_YELLOW "Logement N°%d\n" RESET, loge.idLogement);
    
@@ -158,6 +212,13 @@ void afficherLogement(Logement loge) {
     if(!loge.disponible) printf(BOLD_WHITE  "Occupé par l'étudiant N°%d\n", loge.idEtudiant);
 }
 
+/* 
+   	Fonction: sauvegardeLogements
+   	Finalité: Sauvegarde la liste des logements dans le fichier
+	Paramètre entant/sortant:
+        - fe                    le flot de donnée de sortie
+        - logements             liste chainée des logements
+*/
 void sauvegardeLogements(ListeLogements logements, FILE* fe) {
 	if(logements == NULL) return;
 

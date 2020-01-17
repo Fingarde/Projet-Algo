@@ -8,6 +8,27 @@
 #include "src/menu/menu.h"
 #include "src/color/color.h"
 
+/* 
+   	Fonction: main
+   	Finalité: Fonction globale du programme
+    Variables : 
+        - etudiantsDon 		flot d'entrée du fichier etudiants.don
+		- logementsDon		flot d'entrée du fichier logements.don
+		- demandesDon		flot d'entrée du fichier demandes.don
+
+		- etudiants			tableau d'étudiants
+		- nbEtudiants		nombre d'étudiants dans le tableau
+
+		- logements			liste chainée des logements
+		- demandes			liste chainée des demandes
+
+		- valMenu			choix retenu pour le menu
+		- choix				choix retenu pour continuer la saisie d'ube demande
+
+
+    Valeur retournée : 
+        Le code de retour de l'application
+*/
 int main() {
 	FILE* etudiantsDon;
 	FILE* logementsDon;
@@ -19,7 +40,6 @@ int main() {
 	ListeLogements logements;
 	ListeDemandes demandes;
 
-	Demande demande;
 	int valMenu;
 	char choix;
 
@@ -102,4 +122,6 @@ int main() {
 	fclose(etudiantsDon);
 	fclose(logementsDon);
 	fclose(demandesDon);
+
+	return 0;
 }
