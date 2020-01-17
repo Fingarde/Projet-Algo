@@ -26,7 +26,7 @@ void afficherEtudiant(Etudiant etud);
 MaillonLogement* getLogement(ListeLogements logements, Etudiant etud);
 void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int idEtudiant);
 void insererEtudiant(Etudiant etudiants[], int* nbEtudiants);
-void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int positionEtudiant);
+void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int idEtudiant);
 int rechercheEtudiant(Etudiant etudiants[], int idEtudiant, int nbEtudiants);
 
 #endif

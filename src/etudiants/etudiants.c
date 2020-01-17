@@ -68,7 +68,7 @@ MaillonLogement* getLogement(ListeLogements logements, Etudiant etud) {
 }
 
 int rechercheEtudiant (Etudiant etudiants[], int idEtudiant, int nbEtudiants) { // TODO TOUJOURS BOUCLE INFINIE WTF
-    int deb = 0, m, fin = nbEtudiants - 1;
+    int deb = 0, m, fin = nbEtudiants - 1;      // SI IL EST D=PRESETN ON BOUCLE
 
     while (deb <= fin) {
         m = (fin - deb) / 2;
@@ -133,16 +133,22 @@ void insererEtudiant(Etudiant etudiants[], int* nbEtudiants) {
     (*nbEtudiants)++;
 }
 
-void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int positionEtudiant) {
+void supprimerEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, int idEtudiant) {
     MaillonLogement* logement;
-    int index;
+    int index, pos;
 
-    logement = getLogement(logements, etudiants[positionEtudiant]);
+    pos = rechercheEtudiant(etudiants, idEtudiant, *nbEtudiants);
+    if(pos == -1) {
+        printf("L'étudiant n'existe pas\n");
+        return;
+    }
+
+    logement = getLogement(logements, etudiants[pos]);
     if(logement != NULL) {
         logement->logement.disponible = 1;
     }
 
-    for(index = positionEtudiant; index < (*nbEtudiants) - 1; index++) {
+    for(index = pos; index < (*nbEtudiants) - 1; index++) {
         etudiants[index] = etudiants[index + 1];
     }
 

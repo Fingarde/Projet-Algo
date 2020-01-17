@@ -33,6 +33,8 @@ ListeDemandes chargementDemandes(FILE* fe);
 void afficherDemande(Demande dema);
 void sauvegardeDemandes(ListeDemandes demandes, FILE* fe);
 MaillonDemande* rechercheListe (ListeDemandes listeDemandes, int idDemande);
-ListeDemandes ajouterDemande (ListeDemandes listeDemandes);
+Demande ajouterDemande (ListeDemandes listeDemandes);
+ListeDemandes insererEnTeteDemande(ListeDemandes liste, Demande dema);
+ListeDemandes insererTrieDemandes(ListeDemandes liste, Demande dema);
 
 #endif

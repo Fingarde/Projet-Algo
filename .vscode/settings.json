@@ -9,6 +9,7 @@
         "stdio.h": "c",
         "string.h": "c",
         "menu.h": "c",
-        "enum.h": "c"
+        "enum.h": "c",
+        "color.h": "c"
     }
 }

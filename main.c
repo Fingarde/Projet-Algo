@@ -6,6 +6,7 @@
 
 #include "src/enum/enum.h"
 #include "src/menu/menu.h"
+#include "src/color/color.h"
 
 int main() {
 	FILE* etudiantsDon;
@@ -17,6 +18,10 @@ int main() {
 
 	ListeLogements logements;
 	ListeDemandes demandes;
+
+	Demande demande;
+	int valMenu;
+	char choix;
 
 	//					CHARGEMENT
 	etudiantsDon = fopen("fichiers/etudiants.don", "rb");
@@ -37,7 +42,44 @@ int main() {
 	fclose(logementsDon);
 	fclose(demandesDon);
 
-	choixMenuPrincipal(etudiants, &nbEtudiants, logements, demandes);
+
+	
+
+	afficherMenuPrincipal();
+
+	printf(BOLD_GREEN "Choix: " BOLD_CYAN);
+	scanf("%d%*c", &valMenu);
+
+	//while (valMenu != 9) {2
+		switch (valMenu) {
+			case 1:
+				afficherListeLogementsDispo(logements);
+				break;
+			case 2:
+				afficherListeLogementsOccupe(logements);
+				break;
+			case 3:
+				afficherDemandesEnAttentes(demandes); 
+				break;
+			case 5 :
+				choix = 'o';
+				while (choix == 'o') {
+					insererEtudiant(etudiants, &nbEtudiants);
+					demandes = ajouterDemandeEnAttentes(demandes);
+
+					printf(BOLD_YELLOW "Voulez vous entrez une nouvelle demande (o/n) : ");
+					scanf("%c%*c", &choix);	
+				}
+				break;
+			case 6:
+					demandes = supprimerDemandeEnAttentes(demandes); 
+					break;
+			case 7:
+					departEtudiant(logements, etudiants,  &nbEtudiants); 
+				break;	
+			default:
+				break;
+		}
 
 	//					SAUVEGARDE			
 	etudiantsDon = fopen("fichiers/etudiants.don", "wb");

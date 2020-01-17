@@ -134,44 +134,45 @@ MaillonDemande* rechercheListe (ListeDemandes listeDemandes, int idDemande) {
 	return tmp;
 }
 
-ListeDemandes ajouterDemande (ListeDemandes listeDemandes) {
-	MaillonDemande* tmp;
-
+Demande ajouterDemande (ListeDemandes listeDemandes) {
+	Demande demande;
+	char nomCite[65];
 	int tailleCite;
 
-	tmp = (MaillonDemande*) malloc(sizeof(MaillonDemande));
-	if(tmp == NULL) {
-			printf("Problème mémoire");
-			exit(1);
-	}
-
 	printf(BOLD_GREEN "ID Demande : " RESET);
+	scanf("%d%*c", &demande.idDemande);
 
-	scanf("%d%*c", &tmp->demande.idDemande);
-
-	if (rechercheListe(listeDemandes, tmp->demande.idDemande) != NULL) {
+	if (rechercheListe(listeDemandes, demande.idDemande) != NULL) {
 		printf(BOLD_RED "La demande existe déja\n");
-        return listeDemandes;
+		demande.idDemande = -1;
+        return demande;
 	}
 
 	printf(BOLD_GREEN "ID Étudiant : " RESET);
-	scanf("%d%*c", &tmp->demande.idEtudiant);
+	scanf("%d%*c", &demande.idEtudiant);
 
 	printf(BOLD_GREEN "Échelon de bourse : " RESET);
-	scanf("%d%*c", &tmp->demande.echelon);
+	scanf("%d%*c", &demande.echelon);
 
 	printf(BOLD_GREEN "Nom de la cité : " RESET);
-	fgets(tmp->demande.nomCite, 65, stdin);
+	fgets(nomCite, 65, stdin);
 
-	tailleCite = strlen(tmp->demande.nomCite);
-	if (tmp->demande.nomCite[tailleCite] == '\n') {
-		tmp->demande.nomCite[tailleCite] = '\0';
+	tailleCite = strlen(nomCite);
+	if (nomCite[tailleCite - 1] == '\n') {
+		nomCite[tailleCite - 1] = '\0';
 	}
 
-	printf(BOLD_GREEN "Type de logement : "RESET);
-	scanf("%d%*c", &tmp->demande.typeLogement);
+	demande.nomCite = (char*) malloc(sizeof(char) * tailleCite + 1);
+	if (demande.nomCite == NULL) {
+		printf("Problème d'allocation mémoire\n");
+		exit(1);
+	}
+	strcpy(demande.nomCite, nomCite);
 
-	return tmp;
+	printf(BOLD_GREEN "Type de logement : "RESET);
+	scanf("%d%*c", &demande.typeLogement);
+
+	return demande;
 }
 
 
@@ -196,7 +197,7 @@ ListeDemandes insererTrieDemandes(ListeDemandes liste, Demande dema) {
    if(liste == NULL) {
        liste = insererEnTeteDemande(liste, dema);
    }
-   else if(liste->demande.echelon , dema.echelon) {
+   else if(liste->demande.echelon > dema.echelon) {
        liste = insererEnTeteDemande(liste, dema);
    }
    else {

@@ -1,6 +1,7 @@
 #include "menu.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../color/color.h"
 
@@ -15,65 +16,13 @@ void afficherMenuPrincipal() {
 	printf(BOLD_YELLOW "2» " BOLD_WHITE "Afficher la liste des logements occupés\n");
 	printf(BOLD_YELLOW "3» " BOLD_WHITE "Afficher la liste des demandes de logements en attente\n");
 	printf("\n");
-	printf(BOLD_YELLOW "4» " BOLD_WHITE "Saisir une nouvelle demande de logements\n");
-	printf(BOLD_YELLOW "5» " BOLD_WHITE "Annuler une demande de logements\n");
-	printf(BOLD_YELLOW "6» " BOLD_WHITE "Libérer un logement\n");
+	printf(BOLD_YELLOW "4» " BOLD_WHITE "Traiter les demandes en attentes\n");
 	printf("\n");
-	printf(BOLD_YELLOW "7» " BOLD_WHITE "Supprimer un étudiant\n");
+	printf(BOLD_YELLOW "5 " BOLD_WHITE "Saisir une nouvelle demande de logements\n");
+	printf(BOLD_YELLOW "6» " BOLD_WHITE "Annuler une demande de logements\n");
+	printf(BOLD_YELLOW "7» " BOLD_WHITE "Libérer un logement\n");
 	printf("\n");
 	printf(BOLD_YELLOW "9» " BOLD_WHITE "Quitter le programme\n");
-}
-
-void choixMenuPrincipal(Etudiant etudiants[], int* nbEtudiants , ListeLogements listeLogements, ListeDemandes listeDemandes) {
-	Demande demande;
-	int valMenu;
-	char choix;
-
-	afficherMenuPrincipal();
-
-	printf(BOLD_GREEN "Choix: " BOLD_CYAN);
-	scanf("%d%*c", &valMenu);
-
-	//while (valMenu != 9) {2
-		switch (valMenu) {
-			case 1:
-				afficherListeLogementsDispo(listeLogements);
-				break;
-			case 2:
-				afficherListeLogementsOccupe(listeLogements);
-				break;
-			case 3:
-				afficherDemandesEnAttentes(listeDemandes); 
-				break;
-			case 4 :
-				choix = 'o';
-				while (choix == 'o') {
-					insererEtudiant(etudiants, nbEtudiants);
-					ajouterDemandeEnAttentes(listeDemandes);
-
-					printf(BOLD_YELLOW "Voulez vous entrez une nouvelle demande (o/n) : ");
-					scanf("%c%*c", &choix);	
-				}
-				break;
-			// case 5 :
-
-			// 	break;
-			// case 6 : 
-
-			// 	break;
-			case 7:
-				departEtudiant(listeLogements, etudiants,  nbEtudiants); 
-				break;	
-			default:
-				choixMenuPrincipal(etudiants, nbEtudiants, listeLogements, listeDemandes);
-				break;
-		}
-
-	// afficherMenuPrincipal();
-
-	// printf(BOLD_GREEN "Choix: " BOLD_CYAN);
-	// scanf("%d%*c", &valMenu);
-	//}
 }
 
 void afficherListeLogementsDispo(ListeLogements listeLogements) {
@@ -118,16 +67,59 @@ void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudi
 	scanf("%d", &idEtudiant);
 
 
-	//supprimerEtudiant(logements, etudiants, *nbEtudiants, idEtudiant);
+	supprimerEtudiant(logements, etudiants, nbEtudiants, idEtudiant);
 }
 
-void ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
-	ListeDemandes mDemande;
+ListeDemandes ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
+	Demande demande;
 
-	mDemande = ajouterDemande(listeDemandes);
+	demande = ajouterDemande(listeDemandes);
+	if(demande.idDemande == -1) {
+		return listeDemandes;
+	}
 
-	listeDemandes = insererTrieDemandes();
+
+	return insererTrieDemandes(listeDemandes, demande);
 }
+
+ListeDemandes rechercheDemande(ListeDemandes listeDemandes, int idDemande) {
+	if(listeDemandes == NULL) return NULL;
+ 
+	if(listeDemandes->demande.idDemande == idDemande) return listeDemandes;
+
+	return rechercheDemande(listeDemandes->suivant, idDemande);
+}
+
+ListeDemandes supprimerDemandeEnAttentes(ListeDemandes listeDemandes) {
+	int idDemande;
+	MaillonDemande* tmp;
+	ListeDemandes avant = listeDemandes;
+
+	printf(BOLD_GREEN "ID Demande : " RESET);
+	scanf("%d%*c", &idDemande);
+
+	tmp = rechercheDemande(listeDemandes, idDemande);
+	if(tmp == NULL)
+	{
+		printf(BOLD_RED "La demande spécifié n'existe pas");
+		return listeDemandes;
+	}
+
+	if(avant != tmp) {
+		while(avant->suivant != NULL && avant->suivant != tmp)
+			avant = avant->suivant;
+
+			avant->suivant = tmp->suivant;
+	}
+	else {
+		listeDemandes = avant->suivant;
+	}
+
+	
+
+	return listeDemandes;
+}
+
 
 /*void traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements listeLogements) {
 	if (listeDemandes[i]->disponible == 1) {
