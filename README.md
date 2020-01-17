@@ -12,20 +12,20 @@
 
 #### Fichiers
 
-> Le fichier texte logements est composé :
-	ID logement (0, 1, 2, 3, etc)
-	Nom de la cité 
-	Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
-	Disponible (0 : Non – 1 : Oui)
-	Adapté aux handicapés (0 : Non – 1 : Oui)
-	Si non disponible : ID Etudiant (0, 1, 2, 3, etc)
+Le fichier texte logements est composé :
+>	ID logement (0, 1, 2, 3, etc)
+>	Nom de la cité 
+>	Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
+>	Disponible (0 : Non – 1 : Oui)
+>	Adapté aux handicapés (0 : Non – 1 : Oui)
+>	Si non disponible : ID Etudiant (0, 1, 2, 3, etc)
 
 Le fichier texte demandes est composé :
-	ID Demande (0, 1, 2, 3, etc)
-	ID Etudiant (0, 1, 2, 3, etc)
-	Echelon de bourse de l'étudiant (0 : 0bis – 1 : 01 – 2 : 02 – 3 : 03 – 4 : 04 – 5 : 05 – 6 : 06 – 7 : 07 – 8 : AUCUN)
-	Nom de la cité 
-	Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
+>	ID Demande (0, 1, 2, 3, etc)
+>	ID Etudiant (0, 1, 2, 3, etc)
+>	Echelon de bourse de l'étudiant (0 : 0bis – 1 : 01 – 2 : 02 – 3 : 03 – 4 : 04 – 5 : 05 – 6 : 06 – 7 : 07 – 8 : AUCUN)
+>	Nom de la cité 
+>	Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
 
 
 #### Chargement en mémoire
@@ -33,19 +33,20 @@ Le fichier texte demandes est composé :
 Etudiant : tableaux
 
 Logement : liste chainée de logement
-typedef struct MailleLoge {
-	Logement logement;
-	struct MailleLoge* suivant;
-} MaillonLogement;
-typedef MaillonLogement* ListeLogements;
+> typedef struct MailleLoge {
+>	Logement logement;
+>	struct MailleLoge* suivant;
+> } MaillonLogement;
+
+> typedef MaillonLogement* ListeLogements;
 
 Demande : liste  chainée de demande
+> typedef struct MailleDema {
+>   Demande demande;
+>    struct MailleDema* suivant;
+> } MaillonDemande;
 
-typedef struct MailleDema {
-    Demande demande;
-    struct MailleDema* suivant;
-} MaillonDemande;
-typedef MaillonDemande* ListeDemandes;
+> typedef MaillonDemande* ListeDemandes;
 
 
 #### Structures
