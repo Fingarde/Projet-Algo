@@ -4,21 +4,21 @@
 ##### Maxime DESGRANGES
 ##### Yohann BREUIL
 
-> Projet CROUS
+ Projet CROUS
 
 > #### Pour lancer compiler le programme
  zsh -c 'gcc **/*.c -o projet'
 
 
-> Fichiers
+#### Fichiers
 
-Le fichier texte logements est composé :
-	> - ID logement (0, 1, 2, 3, etc)
-    > - Nom de la cité 
-    > -Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
-    > -Disponible (0 : Non – 1 : Oui)
-    > -Adapté aux handicapés (0 : Non – 1 : Oui)
-    > -Si non disponible : ID Etudiant (0, 1, 2, 3, etc)
+> Le fichier texte logements est composé :
+	ID logement (0, 1, 2, 3, etc)
+	Nom de la cité 
+	Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
+	Disponible (0 : Non – 1 : Oui)
+	Adapté aux handicapés (0 : Non – 1 : Oui)
+	Si non disponible : ID Etudiant (0, 1, 2, 3, etc)
 
 Le fichier texte demandes est composé :
 	ID Demande (0, 1, 2, 3, etc)
@@ -27,7 +27,8 @@ Le fichier texte demandes est composé :
 	Nom de la cité 
 	Type de logement (0 : Chambre – 1 : Studio – 2 : T1 – 3  : T2)
 
-Chargement en mémoire
+
+#### Chargement en mémoire
 
 Etudiant : tableaux
 
@@ -47,10 +48,7 @@ typedef struct MailleDema {
 typedef MaillonDemande* ListeDemandes;
 
 
-
-
-
-Structures
+#### Structures
 
 typedef struct {
     int idLogement; 	
@@ -80,27 +78,7 @@ typedef struct {
 } Demande;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Fonctionnalités
+#### Fonctionnalités
 
 1 – Affichage des logements disponibles (triée par cité) :
 
