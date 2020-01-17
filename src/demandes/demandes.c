@@ -38,7 +38,7 @@ Demande lireDemande (FILE* flot) {
 	}
 	strcpy(dema.nomCite, nomCite);
 	
-	// Type logement
+
 	fscanf(flot, "%d%*c", &dema.typeLogement);
 
 	return dema;
@@ -205,4 +205,57 @@ ListeDemandes insererTrieDemandes(ListeDemandes liste, Demande dema) {
    }
 
    return liste;
+}
+
+
+ListeDemandes supprimerDemande(ListeDemandes listeDemandes, int idDemande) {
+	MaillonDemande* tmp;
+	ListeDemandes avant = listeDemandes;
+
+	tmp = rechercheDemande(listeDemandes, idDemande);
+	if(tmp == NULL)
+	{
+		printf(BOLD_RED "La demande spécifié n'existe pas");
+		return listeDemandes;
+	}
+
+	if(avant != tmp) {
+		while(avant->suivant != NULL && avant->suivant != tmp)
+			avant = avant->suivant;
+
+			avant->suivant = tmp->suivant;
+	}
+	else {
+		listeDemandes = avant->suivant;
+	}
+}
+
+ListeDemandes rechercheDemande(ListeDemandes listeDemandes, int idDemande) {
+	if(listeDemandes == NULL) return NULL;
+ 
+	if(listeDemandes->demande.idDemande == idDemande) return listeDemandes;
+
+	return rechercheDemande(listeDemandes->suivant, idDemande);
+}
+
+int traiterDemande(Demande demande, ListeLogements listeLogements, Etudiant etudiants[], int nbEtudiants) {
+	ListeLogements tmp;
+
+	for(tmp = listeLogements; tmp != NULL; tmp = tmp->suivant) {
+		int pos;
+		if(!tmp->logement.disponible) continue;
+
+		if(strcmp(tmp->logement.nomCite, demande.nomCite) != 0) continue;
+		if(tmp->logement.typeLogement != demande.typeLogement) continue;
+	
+		pos = rechercheEtudiant(etudiants, demande.idEtudiant, nbEtudiants);
+		if(etudiants[pos].handicape != tmp->logement.adapteHandicap) continue;
+
+		tmp->logement.disponible = 0;
+		tmp->logement.idEtudiant = demande.idDemande;
+
+		return 1;
+	}
+
+	return 0;
 }

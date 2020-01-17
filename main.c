@@ -61,6 +61,9 @@ int main() {
 			case 3:
 				afficherDemandesEnAttentes(demandes); 
 				break;
+			case 4:
+				traitementDemandesEnAttentes(demandes, logements, etudiants, nbEtudiants); 
+				break;
 			case 5 :
 				choix = 'o';
 				while (choix == 'o') {
@@ -75,7 +78,7 @@ int main() {
 					demandes = supprimerDemandeEnAttentes(demandes); 
 					break;
 			case 7:
-					departEtudiant(logements, etudiants,  &nbEtudiants); 
+					departEtudiant(logements, etudiants,  &nbEtudiants, demandes); 
 				break;	
 			default:
 				break;

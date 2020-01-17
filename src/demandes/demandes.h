@@ -36,5 +36,8 @@ MaillonDemande* rechercheListe (ListeDemandes listeDemandes, int idDemande);
 Demande ajouterDemande (ListeDemandes listeDemandes);
 ListeDemandes insererEnTeteDemande(ListeDemandes liste, Demande dema);
 ListeDemandes insererTrieDemandes(ListeDemandes liste, Demande dema);
+ListeDemandes supprimerDemande(ListeDemandes listeDemandes, int idDemande);
+ListeDemandes rechercheDemande(ListeDemandes listeDemandes, int idDemande);
+int traiterDemande(Demande demande, ListeLogements listeLogements, Etudiant etudiants[], int nbEtudiants);
 
 #endif

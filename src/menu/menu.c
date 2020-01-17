@@ -18,7 +18,7 @@ void afficherMenuPrincipal() {
 	printf("\n");
 	printf(BOLD_YELLOW "4» " BOLD_WHITE "Traiter les demandes en attentes\n");
 	printf("\n");
-	printf(BOLD_YELLOW "5 " BOLD_WHITE "Saisir une nouvelle demande de logements\n");
+	printf(BOLD_YELLOW "5» " BOLD_WHITE "Saisir une nouvelle demande de logements\n");
 	printf(BOLD_YELLOW "6» " BOLD_WHITE "Annuler une demande de logements\n");
 	printf(BOLD_YELLOW "7» " BOLD_WHITE "Libérer un logement\n");
 	printf("\n");
@@ -60,7 +60,7 @@ void afficherDemandesEnAttentes(ListeDemandes listeDemandes) {
   	afficherDemandesEnAttentes (listeDemandes->suivant);
 }
 
-void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants) {
+ListeDemandes departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudiants, ListeDemandes listeDemandes) {
 	int idEtudiant;
 	
 	printf(BOLD_GREEN "ID de l'étudiant a supprimer: " BOLD_CYAN);
@@ -68,6 +68,7 @@ void departEtudiant(ListeLogements logements, Etudiant etudiants[], int* nbEtudi
 
 
 	supprimerEtudiant(logements, etudiants, nbEtudiants, idEtudiant);
+	return traitementDemandesEnAttentes(listeDemandes, logements, etudiants, *nbEtudiants); 
 }
 
 ListeDemandes ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
@@ -82,49 +83,30 @@ ListeDemandes ajouterDemandeEnAttentes(ListeDemandes listeDemandes) {
 	return insererTrieDemandes(listeDemandes, demande);
 }
 
-ListeDemandes rechercheDemande(ListeDemandes listeDemandes, int idDemande) {
-	if(listeDemandes == NULL) return NULL;
- 
-	if(listeDemandes->demande.idDemande == idDemande) return listeDemandes;
-
-	return rechercheDemande(listeDemandes->suivant, idDemande);
-}
 
 ListeDemandes supprimerDemandeEnAttentes(ListeDemandes listeDemandes) {
 	int idDemande;
-	MaillonDemande* tmp;
-	ListeDemandes avant = listeDemandes;
+
 
 	printf(BOLD_GREEN "ID Demande : " RESET);
 	scanf("%d%*c", &idDemande);
 
-	tmp = rechercheDemande(listeDemandes, idDemande);
-	if(tmp == NULL)
-	{
-		printf(BOLD_RED "La demande spécifié n'existe pas");
-		return listeDemandes;
-	}
+	return supprimerDemande(listeDemandes, idDemande);
+}
 
-	if(avant != tmp) {
-		while(avant->suivant != NULL && avant->suivant != tmp)
-			avant = avant->suivant;
+ListeDemandes traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements listeLogements, Etudiant etudiants[], int nbEtudiants) {
+	ListeDemandes tmp;
+	int traite;
 
-			avant->suivant = tmp->suivant;
+	for(tmp = listeDemandes; tmp != NULL; tmp = tmp->suivant) {
+		traite = traiterDemande(tmp->demande, listeLogements, etudiants, nbEtudiants);
+		if(traite) {
+			listeDemandes = supprimerDemande(listeDemandes, tmp->demande.idDemande);
+			return listeDemandes;
+			
+			break;
+		}
 	}
-	else {
-		listeDemandes = avant->suivant;
-	}
-
-	
 
 	return listeDemandes;
 }
-
-
-/*void traitementDemandesEnAttentes (ListeDemandes listeDemandes, ListeLogements listeLogements) {
-	if (listeDemandes[i]->disponible == 1) {
-		if (listeDemandes[i]->)
-		{
-		}
-	}
-}*/
