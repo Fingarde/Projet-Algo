@@ -33,20 +33,18 @@ Le fichier texte demandes est composé :
 Etudiant : tableaux
 
 Logement : liste chainée de logement
-> typedef struct MailleLoge {
->	Logement logement;
->	struct MailleLoge* suivant;
-> } MaillonLogement;
-
-> typedef MaillonLogement* ListeLogements;
+typedef struct MailleLoge {
+	Logement logement;
+	struct MailleLoge* suivant;
+} MaillonLogement;
+typedef MaillonLogement* ListeLogements;
 
 Demande : liste  chainée de demande
-> typedef struct MailleDema {
->   Demande demande;
->    struct MailleDema* suivant;
-> } MaillonDemande;
-
-> typedef MaillonDemande* ListeDemandes;
+typedef struct MailleDema {
+   Demande demande;
+    struct MailleDema* suivant;
+} MaillonDemande;
+typedef MaillonDemande* ListeDemandes;
 
 
 #### Structures
@@ -80,35 +78,40 @@ typedef struct {
 
 
 #### Fonctionnalités
+1- Chargement des donées 
 
-1 – Affichage des logements disponibles (triée par cité) :
+	Charge en mémoire toutes les données nécessaires au bon fonctionnement du programme
+
+2 – Affichage des logements disponibles (triée par cité) :
 
 	Affiche les logements disponibles (n'ayant pas d'étudiant habitant)
 
-2 – Affichage des logements occupés (avec ID de l'étudiant occupant) : 
+3 – Affichage des logements occupés (avec ID de l'étudiant occupant) : 
 
 	Affiche les logements occupés (ayant un étudiant habitant)
 
-3 – Affichage des demandes en attentes
+4 – Affichage des demandes en attentes
 
 	Affiche les demandes en attentes 
 
-4 – Traitement des demandes en attentes (fonction non opérationnel)
+5 – Traitement des demandes en attentes (fonction non opérationnel)
 
 	Traite les demandes en attentes si un étudiant demande un type de logement dans une cité souhaité et que ce logment est diponible alors la demande est validée
-5 – Saisissement d'une nouvelle demande 
+6 – Saisissement d'une nouvelle demande 
 
 	Saisie d'un étudiant (si nouveau) et saisie d'une demande à ajouter
 
-6 – Annulation d'une demande 
+7 – Annulation d'une demande 
 
 	Annule une demande et la retire
 
-7 – Libération d'un logement 
+8 – Libération d'un logement 
 
 	Changement de la disponibilité pour ce logement ce qui peut aboutir à une réponse positive d'une demande et supprime un étudiant
+	
+9 - Sauvegarde des données
 
-
+	Sauvegarde les données de l'application dans leur fichier respectif
 
 
   
